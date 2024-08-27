@@ -8,3 +8,71 @@
     scroll-behavior: smooth;
     scroll-padding: 2rem;
   }
+.container {
+  max-width: 1068px;
+  margin: auto;
+  width: 100%;
+}
+section {
+  padding: 4rem 0 3rem;
+}
+img {
+  width: 100%;
+}
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #000814;
+  box-shadow: 0 1px 4px hsl(0 4% 15%/10%);
+  z-index: 100;
+}
+.navContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 0;
+}
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, auto));
+  gap: 1.5rem;
+}
+.boxItem{
+    position: relative;
+    transition: .5s ease-in-out;
+}
+.boxItem:hover{
+padding: 10px;
+border: 2px solid #4f78b4;
+}
+.imgItem{
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit:cover;
+    margin-bottom: .5rem;
+}
+.ItemT{
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: .5rem;
+}
+.precioI{
+    font-weight: 500;
+}
+addCart{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: #fdfffc;
+    color: #000814;
+    padding: 11px;
+    cursor: pointer;
+    transition: .5s;
+}
+addCart:hover{
+    background-color: #4f78b4;
+    color: #fdfffc;
+}
