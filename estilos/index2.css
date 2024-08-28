@@ -3,50 +3,127 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    list-style: none;
-    text-decoration: none;
-    scroll-behavior: smooth;
-    scroll-padding: 2rem;
   }
  /*Navegacion*/ 
-ul li a{
-    text-decoration: none;
-    display:block;
-}
-ul li a:hover{
-    
-}
-li ul{
-    display:none;
-}
- /*Section*/ 
-.container {
-  max-width: 1068px;
-  margin: auto;
-  width: 100%;
-}
-section {
-  padding: 4rem 0 3rem;
-}
-img {
-  width: 100%;
-}
-header {
+ header {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   background-color: #000814;
-  box-shadow: 0 1px 4px hsl(0 4% 15%/10%);
   z-index: 100;
 }
-.navContainer {
+ nav{
   display: flex;
-  align-items: center;
+  width: 100%;
+  background-color: #4f77b4;
+  position: relative;
   justify-content: space-between;
-  padding: 20px 0;
+  text-align: center;
+  padding: 10px 25px;
+ }
+ nav .icono{
+  font-size: 35px;
+  font-weight: 800;
+  color: #fdfffc;
+  cursor: pointer;
+ }
+nav ul{
+  display: flex;
+  list-style: none;
+  margin: auto 0;
+}
+nav ul li {
+  margin: auto 10px;
+}
+nav ul li a{
+    color: #fff;
+    font-size: 20px;
+    text-decoration: none;
+    text-transform: capitalize;
+    letter-spacing: 1px;
+    padding: 5px 10px 7px;
+}
+nav ul li a:hover{
+    background-color: #000814;
+    color: #fdfffc;
+    transition: 0.5s;
+    border-radius: 30px;
+}
+nav .boxSearch{
+  display: flex;
+  margin: auto 0;
+  height: 35px;
+  line-height: 35px;
+}
+nav .boxSearch input{
+  border: none;
+  outline:none;
+  background: #fff;
+  height: 100%;
+  padding: 0 10px;
+  font-size: 20px;
+  width: 350px;
+  border-radius: 30px 0px 0px 30px;
+}
+nav .boxSearch span{
+  color: #4f78b4;
+  font-size: 20px;
+  background-color: #ffffff;
+  height: 100%;
+  padding: 8px;
+  position: relative;
+  cursor: pointer;
+  z-index: 1;
+  border-radius: 0px 30px 30px 0;
+}
+nav .boxSearch span:hover{
+  background-color: #000814;
+  transition: 0.5s;
+  border-radius: 0px 30px 30px 0;
+}
+nav .cart{
+  display: flex;
+  margin: auto 0;
+  height: 35px;
+  line-height: 35px;
+}
+nav .cart span{
+  color: #4f78b4;
+  font-size: 20px;
+  background-color: #ffffff;
+  height: 100%;
+  padding: 8px;
+  position: relative;
+  cursor: pointer;
+  z-index: 1;
+  border-radius:30px;
+}
+nav .cart span:hover{
+  background-color: #000814;
+  transition: 0.5s;
+  border-radius: 30px;
+}
+nav .bar{
+  position: relative;
+  margin: auto;
+  display: none;
+}
+nav .bar span{
+  position: absolute;
+  color: #fdfffc;
+  font-size: 35px;
+}
+ /*Section*/ 
+section {
+  padding: 7rem 0 3rem;
+}
+img {
+  width: 100%;
 }
 .container {
+  margin: auto;
+  width: 75%;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, auto));
   gap: 1.5rem;
@@ -74,17 +151,66 @@ border: 2px solid #4f78b4;
 .precioI{
     font-weight: 500;
 }
-addCart{
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    background-color: #fdfffc;
-    color: #000814;
-    padding: 11px;
-    cursor: pointer;
-    transition: .5s;
+/*Responsive*/
+input[type="checkbox"]{
+  display: none;
 }
-addCart:hover{
-    background-color: #4f78b4;
-    color: #fdfffc;
+@media screen and (max-width:1200px){
+  nav{
+    display: block;
+    padding: 0;
+  }
+  nav .icono{
+    display: inline-block;
+    padding: 15px 30px;
+   }
+   nav .boxSearch{
+    display: inline-flex;
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 15px;
+  }
+  nav .boxSearch input{
+    width: 90%;
+  }
+  nav ul{
+    display: flex;
+    flex-direction: column;
+    height: 0;
+    visibility: hidden;
+    transition: 0.3s;
+  }
+  nav ul li{
+    text-align: center;
+  }
+  nav ul li a{
+    display: block;
+    color: #fff;
+    font-size: 20px;
+    padding: 25px;
+  }
+  nav .cart{
+    display: block;
+    margin: auto 0;
+  }
+  nav .bar{
+    position: absolute;
+    top: 20px;
+    right: 80px;
+    display: block;
+    cursor: pointer;
+  }
+  nav .bar #close{
+    display: none;
+  }
+  #check:checked ~ nav .bar #close{
+    display: block;
+  }
+  #check:checked ~ nav .bar #menu{
+    display: none;
+  }
+  #check:checked ~ nav ul{
+    visibility: visible;
+    height: 465px;
+  }
 }
