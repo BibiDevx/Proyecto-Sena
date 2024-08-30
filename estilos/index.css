@@ -50,6 +50,7 @@ nav ul li a:hover{
     transition: 0.5s;
     border-radius: 30px;
 }
+/*Barra de busqueda nav*/
 nav .boxSearch{
   display: flex;
   margin: auto 0;
@@ -82,13 +83,14 @@ nav .boxSearch span:hover{
   transition: 0.5s;
   border-radius: 0px 30px 30px 0;
 }
-nav .cart{
+/*Icono carro*/
+nav .cartIcon{
   display: flex;
   margin: auto 0;
   height: 35px;
   line-height: 35px;
 }
-nav .cart span{
+nav .cartIcon span{
   color: #4f78b4;
   font-size: 20px;
   background-color: #ffffff;
@@ -99,11 +101,12 @@ nav .cart span{
   z-index: 1;
   border-radius:30px;
 }
-nav .cart span:hover{
+nav .cartIcon span:hover{
   background-color: #000814;
   transition: 0.5s;
   border-radius: 30px;
 }
+/*Para responsive*/
 nav .bar{
   position: relative;
   margin: auto;
@@ -114,9 +117,24 @@ nav .bar span{
   color: #fdfffc;
   font-size: 35px;
 }
+/*carrito de compras*/
+nav .cart{
+	color:#fdfffc;
+	position:fixed;
+	top:0;
+	right:0;
+	right:-100%;
+	width:360px;
+	height:100vh;
+	overflow-y:auto;
+	overflow-x:hidden;
+	padding:20px;
+	transition:1.7s;
+}
  /*Section*/ 
 section {
-  padding: 7rem 0 3rem;
+	margin-top:4rem;
+	padding: 3rem 0;
 }
 img {
   width: 100%;
@@ -135,6 +153,7 @@ img {
 .boxItem:hover{
 padding: 10px;
 border: 2px solid #4f78b4;
+border-radius:1%;
 }
 .imgItem{
     width: 100%;
@@ -154,16 +173,23 @@ border: 2px solid #4f78b4;
 .addCart{
     color: #4f78b4;
     background-color:#fff;
+	position:absolute;
+	bottom:0;
+	right:0;
+	padding:11px;
+	transition:0.5s;
+	cursor:pointer;
 }
 .addCart:hover{
     color: #fff;
     background-color:#4f78b4;
+	border-radius:2%;
 }
 /*Responsive*/
 input[type="checkbox"]{
   display: none;
 }
-@media screen and (max-width:1200px){
+@media screen and (max-width:900px){
   nav{
     display: block;
     padding: 0;
@@ -197,7 +223,7 @@ input[type="checkbox"]{
     font-size: 20px;
     padding: 25px;
   }
-  nav .cart{
+  nav .cartIcon{
     display: block;
     margin: auto 0;
   }
@@ -211,6 +237,7 @@ input[type="checkbox"]{
   nav .bar #close{
     display: none;
   }
+  
   #check:checked ~ nav .bar #close{
     display: block;
   }
