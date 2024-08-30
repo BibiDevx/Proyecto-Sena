@@ -151,6 +151,14 @@ border: 2px solid #4f78b4;
 .precioI{
     font-weight: 500;
 }
+.addCart{
+    color: #4f78b4;
+    background-color:#fff;
+}
+.addCart:hover{
+    color: #fff;
+    background-color:#4f78b4;
+}
 /*Responsive*/
 input[type="checkbox"]{
   display: none;
