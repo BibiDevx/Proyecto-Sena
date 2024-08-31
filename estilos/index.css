@@ -1,11 +1,11 @@
 * {
-    font-family: "Poppins", sans-serif;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
- /*Navegacion*/ 
- header {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+/*Navegacion*/
+header {
   position: fixed;
   top: 0;
   left: 0;
@@ -13,7 +13,7 @@
   background-color: #000814;
   z-index: 100;
 }
- nav{
+nav {
   display: flex;
   width: 100%;
   background-color: #4f77b4;
@@ -21,14 +21,14 @@
   justify-content: space-between;
   text-align: center;
   padding: 10px 25px;
- }
- nav .icono{
+}
+nav .icono {
   font-size: 35px;
   font-weight: 800;
   color: #fdfffc;
   cursor: pointer;
- }
-nav ul{
+}
+nav ul {
   display: flex;
   list-style: none;
   margin: auto 0;
@@ -36,30 +36,49 @@ nav ul{
 nav ul li {
   margin: auto 10px;
 }
-nav ul li a{
-    color: #fff;
-    font-size: 20px;
-    text-decoration: none;
-    text-transform: capitalize;
-    letter-spacing: 1px;
-    padding: 5px 10px 7px;
+nav ul li a {
+  color: #fff;
+  font-size: 20px;
+  text-decoration: none;
+  text-transform: capitalize;
+  letter-spacing: 1px;
+  padding: 5px 10px 7px;
 }
-nav ul li a:hover{
-    background-color: #000814;
-    color: #fdfffc;
-    transition: 0.5s;
-    border-radius: 30px;
+nav ul li a:hover {
+  background-color: #000814;
+  color: #fdfffc;
+  transition: 0.5s;
+  border-radius: 10px;
 }
+nav ul li:hover ul {
+  display: block;
+  align-items: center;
+  background-color: #4f77b4;
+  margin-top: 6px;
+  padding: 0 0 2px 0;
+  border-radius: 10px;
+}
+ul .submenu {
+  display: none;
+  position: absolute;
+}
+ul .submenu li {
+  margin: 0;
+}
+ul .submenu li a {
+  display: block;
+}
+
 /*Barra de busqueda nav*/
-nav .boxSearch{
+nav .boxSearch {
   display: flex;
   margin: auto 0;
   height: 35px;
   line-height: 35px;
 }
-nav .boxSearch input{
+nav .boxSearch input {
   border: none;
-  outline:none;
+  outline: none;
   background: #fff;
   height: 100%;
   padding: 0 10px;
@@ -67,7 +86,7 @@ nav .boxSearch input{
   width: 350px;
   border-radius: 30px 0px 0px 30px;
 }
-nav .boxSearch span{
+nav .boxSearch span {
   color: #4f78b4;
   font-size: 20px;
   background-color: #ffffff;
@@ -78,19 +97,19 @@ nav .boxSearch span{
   z-index: 1;
   border-radius: 0px 30px 30px 0;
 }
-nav .boxSearch span:hover{
+nav .boxSearch span:hover {
   background-color: #000814;
   transition: 0.5s;
   border-radius: 0px 30px 30px 0;
 }
 /*Icono carro*/
-nav .cartIcon{
+nav .cartIcon {
   display: flex;
   margin: auto 0;
   height: 35px;
   line-height: 35px;
 }
-nav .cartIcon span{
+nav .cartIcon span {
   color: #4f78b4;
   font-size: 20px;
   background-color: #ffffff;
@@ -99,42 +118,42 @@ nav .cartIcon span{
   position: relative;
   cursor: pointer;
   z-index: 1;
-  border-radius:30px;
+  border-radius: 30px;
 }
-nav .cartIcon span:hover{
+nav .cartIcon span:hover {
   background-color: #000814;
   transition: 0.5s;
   border-radius: 30px;
 }
 /*Para responsive*/
-nav .bar{
+nav .bar {
   position: relative;
   margin: auto;
   display: none;
 }
-nav .bar span{
+nav .bar span {
   position: absolute;
   color: #fdfffc;
   font-size: 35px;
 }
 /*carrito de compras*/
-nav .cart{
-	color:#fdfffc;
-	position:fixed;
-	top:0;
-	right:0;
-	right:-100%;
-	width:360px;
-	height:100vh;
-	overflow-y:auto;
-	overflow-x:hidden;
-	padding:20px;
-	transition:1.7s;
+nav .cart {
+  color: #fdfffc;
+  position: fixed;
+  top: 0;
+  right: 0;
+  right: -100%;
+  width: 360px;
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 20px;
+  transition: 1.7s;
 }
- /*Section*/ 
+/*Section*/
 section {
-	margin-top:4rem;
-	padding: 3rem 0;
+  margin-top: 4rem;
+  padding: 3rem 0;
 }
 img {
   width: 100%;
@@ -146,105 +165,105 @@ img {
   grid-template-columns: repeat(auto-fit, minmax(220px, auto));
   gap: 1.5rem;
 }
-.boxItem{
-    position: relative;
-    transition: .5s ease-in-out;
+.boxItem {
+  position: relative;
+  transition: 0.5s ease-in-out;
 }
-.boxItem:hover{
-padding: 10px;
-border: 2px solid #4f78b4;
-border-radius:1%;
+.boxItem:hover {
+  padding: 10px;
+  border: 2px solid #4f78b4;
+  border-radius: 1%;
 }
-.imgItem{
-    width: 100%;
-    aspect-ratio: 1/1;
-    object-fit:cover;
-    margin-bottom: .5rem;
+.imgItem {
+  width: 100%;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  margin-bottom: 0.5rem;
 }
-.ItemT{
-    font-size: 1.1rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    margin-bottom: .5rem;
+.ItemT {
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
 }
-.precioI{
-    font-weight: 500;
+.precioI {
+  font-weight: 500;
 }
-.addCart{
-    color: #4f78b4;
-    background-color:#fff;
-	position:absolute;
-	bottom:0;
-	right:0;
-	padding:11px;
-	transition:0.5s;
-	cursor:pointer;
+.addCart {
+  color: #4f78b4;
+  background-color: #fff;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 11px;
+  transition: 0.5s;
+  cursor: pointer;
 }
-.addCart:hover{
-    color: #fff;
-    background-color:#4f78b4;
-	border-radius:2%;
+.addCart:hover {
+  color: #fff;
+  background-color: #4f78b4;
+  border-radius: 2%;
 }
 /*Responsive*/
-input[type="checkbox"]{
+input[type="checkbox"] {
   display: none;
 }
-@media screen and (max-width:900px){
-  nav{
+@media screen and (max-width: 400px) {
+  nav {
     display: block;
     padding: 0;
   }
-  nav .icono{
+  nav .icono {
     display: inline-block;
     padding: 15px 30px;
-   }
-   nav .boxSearch{
+  }
+  nav .boxSearch {
     display: inline-flex;
     width: 100%;
     justify-content: center;
     margin-bottom: 15px;
   }
-  nav .boxSearch input{
+  nav .boxSearch input {
     width: 90%;
   }
-  nav ul{
+  nav ul {
     display: flex;
     flex-direction: column;
     height: 0;
     visibility: hidden;
     transition: 0.3s;
   }
-  nav ul li{
+  nav ul li {
     text-align: center;
   }
-  nav ul li a{
+  nav ul li a {
     display: block;
     color: #fff;
     font-size: 20px;
     padding: 25px;
   }
-  nav .cartIcon{
+  nav .cartIcon {
     display: block;
     margin: auto 0;
   }
-  nav .bar{
+  nav .bar {
     position: absolute;
     top: 20px;
     right: 80px;
     display: block;
     cursor: pointer;
   }
-  nav .bar #close{
+  nav .bar #close {
     display: none;
   }
-  
-  #check:checked ~ nav .bar #close{
+
+  #check:checked ~ nav .bar #close {
     display: block;
   }
-  #check:checked ~ nav .bar #menu{
+  #check:checked ~ nav .bar #menu {
     display: none;
   }
-  #check:checked ~ nav ul{
+  #check:checked ~ nav ul {
     visibility: visible;
     height: 465px;
   }
