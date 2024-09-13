@@ -1,10 +1,5 @@
-const addToShoppingCartButtons = document.querySelectorAll('.fa-cart-plus');
-addToShoppingCartButtons.forEach(addToCartButton =>{
-    addToCartButton.addEventListener('click',addToCartClicked);
-});
-
-function addToCartClicked(event){
-    const  button = event.target;
-    const item = button.closest('.cajaproducto');
-    console.log('addToCartClicked -> .cajaproducto',item);
-}
+//variables
+let allContainerCart = document.querySelector('.');
+let containerBuyCart = document.querySelector('.card-items');
+let priceTotal = document.querySelector('.price-total')
+let amountProduct = document.querySelector('.count-product');
