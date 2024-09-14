@@ -1,21 +1,25 @@
 * {
   font-family: "Poppins", sans-serif;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+
 }
-/*Navegacion*/
 header {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  background-color: #000814;
   z-index: 100;
+}
+header p{
+  position: absolute;
+  top: 25px;
+  right: 41px;
+  padding: 1px 6px;
+  border-radius: 50%;
+  font-weight: 700;
+  line-height: 18px;
 }
 nav {
   display: flex;
-  width: 100%;
   background-color: #4f77b4;
   position: relative;
   justify-content: space-between;
@@ -90,7 +94,6 @@ nav .boxSearch span {
   color: #4f78b4;
   font-size: 20px;
   background-color: #ffffff;
-  height: 100%;
   padding: 8px;
   position: relative;
   cursor: pointer;
@@ -118,12 +121,6 @@ nav .cartIcon span {
   position: relative;
   cursor: pointer;
   z-index: 1;
-  border-radius: 30px;
-}
-nav .cartIcon span:hover {
-  background-color: #000814;
-  transition: 0.5s;
-  border-radius: 30px;
 }
 /*Para responsive*/
 nav .bar {
@@ -136,79 +133,135 @@ nav .bar span {
   color: #fdfffc;
   font-size: 35px;
 }
-/*carrito de compras*/
-nav .cart {
-  color: #fdfffc;
-  position: fixed;
-  top: 0;
-  right: 0;
-  right: -100%;
-  width: 360px;
-  height: 100vh;
-  overflow-y: auto;
-  overflow-x: hidden;
-  padding: 20px;
-  transition: 1.7s;
+.cart{
+  width: 39px;
+  height: 38px;
 }
-/*Section*/
-section {
-  margin-top: 4rem;
-  padding: 3rem 0;
+.cart-products{
+  position: absolute!important;
+  top: 82px;
+  right: -18px;
+  background-color: #fff;
+  padding: 0 18px;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 20%);
+  display: none;
+  min-width: 290px;
 }
-img {
-  width: 100%;
+
+.cart:hover{
+  margin-bottom: 16px;
+  transition-duration: .5s;
 }
-.container {
+/*end header*/
+.carts{
+position: relative;
+transition: 0.5s ease-in-out;
+padding-bottom: 10px;
+}
+.carts:hover{
+padding: 10px;
+border: 2px solid #4f78b4;
+border-radius: 1%;
+}
+.products {
   margin: auto;
   width: 75%;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, auto));
   gap: 1.5rem;
 }
-.boxItem {
-  position: relative;
-  transition: 0.5s ease-in-out;
+section {
+margin-top: 1.5rem;
+padding: 3rem 0;
 }
-.boxItem:hover {
-  padding: 10px;
-  border: 2px solid #4f78b4;
-  border-radius: 1%;
+img {
+width: 100%;
+cursor: pointer;
 }
-.imgItem {
-  width: 100%;
-  aspect-ratio: 1/1;
-  object-fit: cover;
-  margin-bottom: 0.5rem;
+.carts img{
+width: 100%;
+aspect-ratio: 1/1;
+object-fit: cover;
+margin-bottom: 0.5rem;
 }
-.ItemT {
-  font-size: 1.1rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  margin-bottom: 0.5rem;
+.carts p{
+font-size: 1.1rem;
+font-weight: 600;
+text-transform: capitalizes;
+margin-bottom: 1rem;
 }
-.precioI {
-  font-weight: 500;
+.carts .detalles{
+display: inline;
 }
-.addCart {
-  color: #4f78b4;
-  background-color: #fff;
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  padding: 11px;
-  transition: 0.5s;
+.carts a{
+color: #fff;
+padding: 8px;
+transition: 0.5s;
+cursor: pointer;
+background-color: #000814;
+text-decoration: none;
+border-radius: 10px;
+}
+
+.carts a:hover{
+color: #fff;
+background-color: #4f78b4;
+border-radius: 10px;
+}
+
+/*float cart*/
+.cart-products .item img{
+  width: 115px;
+}
+
+.cart-products .item{
+  display: flex;
+  align-items: center;
+  border-bottom: solid 2px red;
+}
+.cart-products .item .item-content{
+  margin: 0 19px;
+  width: 201px;
+}
+.cart-products .item .item-content h5{
+  margin: 0;
+  font-size: 15px;
+  font-weight: 400;
+  font-family: system-ui;
+}
+.cart-products .item .item-content h6{
+  margin: 0;
+  font-size: 13px;
+  font-weight: 400;
+  font-family: system-ui;
+}
+.cart-products .item span{
+  background-color: red;
+  padding: 0px 5px;
+  border-radius: 50%;
+  color: #fff;
+  font-family: system-ui;
   cursor: pointer;
 }
-.addCart:hover {
-  color: #fff;
-  background-color: #4f78b4;
-  border-radius: 2%;
+.cart-products h3{
+  margin-bottom: 0;
+}
+.cart-products .item .item-content h5.cart-price{
+  font-weight: 700;
+}
+
+/*stye to btn close*/
+p.close-btn{
+  top: -4px;
+  right: 20px;
+  cursor: pointer;
+  color: #000;
 }
 /*Responsive*/
 input[type="checkbox"] {
   display: none;
 }
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 1000px) {
   nav {
     display: block;
     padding: 0;
