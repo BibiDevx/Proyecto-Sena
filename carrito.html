@@ -19,35 +19,16 @@
       <main>
         <h2 class="titulo-principal">Carrito</h2>
         <div class="contenedor-carrito">
-          <p class="carrito-vacio">Tu carrito esta vacio <i class="bi bi-emoji-grimace"></i></p>
-          <div class="carrito-productos disabled">
+          <p id="carrito-vacio" class="carrito-vacio">Tu carrito esta vacio <i class="bi bi-emoji-grimace"></i></p>
+          <div id="carrito-productos" class="carrito-productos disabled">
             <div class="carrito-producto">
-              <img class="carrito-producto-imagen" src="./img/cpu.png" alt="" />
-              <div class="carrito-producto-titulo">
-                <small>Titulo</small>
-                <h3>Procesador AMD 5600G</h3>
-              </div>
-              <div class="carrito-producto-cantidad">
-                <small>Cantidad</small>
-                <p>1</p>
-              </div>
-              <div class="carrito-producto-precio">
-                <small>Precio</small>
-                <p>560.000</p>
-              </div>
-              <div class="carrito-producto-subtotal">
-                <small>Subtotal</small>
-                <p>560.000</p>
-              </div>
-              <button class="carrito-producto-eliminar">
-                <i class="bi bi-cart-x-fill"></i>
-              </button>
+              <!--Lo de aqui esta en carrito.js-->
             </div>
           </div>
 
-          <div class="carrito-acciones disabled">
+          <div id="carrito-acciones" class="carrito-acciones disabled">
             <div class="carrito-acciones-izq">
-              <button class="carrito-acciones-volver">Seguir Comprando</button>
+              <a href="productos.html"><button class="carrito-acciones-volver">Seguir Comprando</button></a>
             </div>
             <div class="carrito-acciones-centro">
               <button class="carrito-acciones-vaciar">Vaciar</button>
@@ -60,12 +41,12 @@
               </div>
             </div>
           </div>
-          <p class="carrito-comprado disabled">Gracias por tu compra    <i class="bi bi-emoji-sunglasses"></i></p>
+          <p id="carrito-comprado" class="carrito-comprado disabled">Gracias por tu compra    <i class="bi bi-emoji-sunglasses"></i></p>
         </div>
       </main>
     </div>
     <!--Footer-->
     <footer></footer>
-    <script src="./js/header.js"></script>
+    <script src="./js/carrito.js"></script>
   </body>
 </html>

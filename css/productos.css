@@ -1,13 +1,12 @@
 :root{
-    --clr-main: #4f77b4;
-    --clr-main-ligh: #4a89e7;
     --clr-white:#ececec;
-    --clr-gray:#e2e2e2;
-
-}
+    --clr-gray:#110f0f;
+    --clr-gray-ligh:#f7f7f7;
+    --clr-encabezado:#007bff;
+  }
 a{
     text-decoration: none;
-    color: #000;
+    color: var(--clr-gray);
 }
 ul{
     list-style: none;
@@ -42,6 +41,7 @@ aside{
     font-weight: 600;
     padding: 1rem;
     width: 100%;
+    text-transform: uppercase;
 }
 .boton-menu.active{
     background-color: var(--clr-white);
@@ -50,24 +50,39 @@ aside{
 }
 main{
     background-color: var(--clr-white);
-    margin: 6.2rem 1.5rem  2rem 0;
+    margin: 6.2rem 3rem  2rem 0;
     border-radius: 2rem;
+    padding:0 25px 
 }
 .titulo-principal{
-    /*color: var(--clr-main);*/
+    color: var(--clr-encabezado);
     text-align: center;
+    text-transform: uppercase;
 }
 .contenedor-productos{
     display: grid;
     grid-template-columns: repeat(4,1fr);
     gap: 1rem;
 }
+.producto{
+    background-color: rgba(0, 123, 255, 0.1);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+    overflow: hidden;
+}
+.producto:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+}
 .producto-imagen{
     max-width: 100%;
     border-radius: 1rem;
 }
 .producto-detalles{
-   /* background-color: var(--clr-main);
+   /* background-color: var(--clr-encabezado);
     color:var(--clr-white);*/
     padding: .5rem;
     border-radius: 1rem;
@@ -76,7 +91,7 @@ main{
     display: flex;
     flex-direction: column;
     gap: .08rem;
-    text-transform: lowercase;
+    text-transform: capitalize;
     text-align: center;
 }
 .producto-titulo{
@@ -96,15 +111,15 @@ main{
     margin: auto;
     width: 50%;
     border: 0;
-    background-color: var(--clr-gray);
-    color: var(--clr-main);
+    background-color: var(--clr-encabezado);
+    color: var(--clr-white);
     padding: .5rem;
     border-radius: 1rem;
     cursor: pointer;
     border: 2px solid var(--clr-white);
 }
 .producto-agregar:hover{
-    background-color: var(--clr-main);
+    background-color: var(--clr-gray);
     color: var(--clr-white);
     transition: 0.5s;
 }
@@ -112,14 +127,16 @@ main{
     margin: auto;
     width: 50%;
     border: 0;
-    background-color: var(--clr-main-ligh);
-    color: var(--clr-main);
+    background-color: var(--clr-encabezado);
     padding: .5rem;
     border-radius: 1rem;
     cursor: pointer;
     border: 2px solid var(--clr-white);
 }
-.detalles-producto:hover{
-    background-color: var(--clr-main);
+.detalles-producto a{
     color: var(--clr-white);
+}
+.detalles-producto:hover{
+    background-color: var(--clr-gray);
+    transition: 0.5s;
 }
