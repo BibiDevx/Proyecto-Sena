@@ -1,0 +1,227 @@
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+  }
+  header p{
+    position: absolute;
+    top: 25px;
+    right: 41px;
+    padding: 1px 6px;
+    border-radius: 50%;
+    font-weight: 700;
+    line-height: 18px;
+  }
+  header nav {
+    display: flex;
+    background-color: #4f77b4;
+    position: relative;
+    justify-content: space-between;
+    text-align: center;
+    padding: 10px 25px;
+  }
+  header nav .icono {
+    font-size: 35px;
+    font-weight: 800;
+    color: #fdfffc;
+    cursor: pointer;
+  }
+  header nav ul {
+    display: flex;
+    list-style: none;
+    margin: auto 0;
+  }
+  header nav ul li {
+    margin: auto 10px;
+  }
+  header nav ul li a {
+    color: #fff;
+    font-size: 20px;
+    text-decoration: none;
+    text-transform: capitalize;
+    letter-spacing: 1px;
+    padding: 5px 10px 7px;
+  }
+  header nav ul li a:hover {
+    background-color: #000814;
+    color: #fdfffc;
+    transition: 0.5s;
+    border-radius: 10px;
+  }
+  header nav ul li:hover ul {
+    display: block;
+    align-items: center;
+    background-color: #4f77b4;
+    margin-top: 6px;
+    padding: 0 0 2px 0;
+    border-radius: 10px;
+  }
+  ul .submenu {
+    display: none;
+    position: absolute;
+  }
+  ul .submenu li {
+    margin: 0;
+  }
+  ul .submenu li a {
+    display: block;
+  }
+  /*Barra de busqueda nav*/
+   header nav .boxSearch {
+    display: flex;
+    margin: auto 0;
+    height: 35px;
+  }
+  header nav .boxSearch input {
+    border: none;
+    outline: none;
+    background: #fff;
+    height: 100%;
+    padding: 0 10px;
+    font-size: 20px;
+    width: 350px;
+    border-radius: 30px 0px 0px 30px;
+  }
+  header nav .boxSearch i{
+    color: #4f78b4;
+    font-size: 20px;
+    background-color: #ffffff;
+    padding: 8px;
+    position: relative;
+    cursor: pointer;
+    z-index: 1;
+    border-radius: 0px 30px 30px 0;
+  }
+  header nav .boxSearch i:hover {
+    background-color: #000814;
+    transition: 0.5s;
+    border-radius: 0px 30px 30px 0;
+  }
+  /*Icono carro*/
+  header nav .cartIcon {
+    display: flex;
+    margin: auto 0;
+    height: 35px;
+  }
+  header nav .cartIcon{
+    font-size: 20px;
+    border-radius: 30px;
+    background-color: #ffffff;
+    height: 100%;
+    padding: 8px;
+    position: relative;
+    cursor: pointer;
+    z-index: 1;
+  }
+  header nav .cartIcon:hover{
+    background-color: #000814;
+    transition: 0.5s;
+    border-radius: 30px;
+}
+header nav .cartIcon a{
+  color:#4f78b4;
+}
+header nav .bar{
+    position: relative;
+    margin: auto;
+    display: none;
+}
+header nav .bar span{
+    position: absolute;
+    color: #fdfffc;
+    font-size: 35px;
+}
+/*Footer*/
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 40px 0;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.footer-section {
+    margin-bottom: 20px;
+}
+
+.footer-section h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    font-weight: 700;
+    position: relative;
+}
+
+.footer-section h2::after {
+    content: '';
+    width: 40px;
+    height: 2px;
+    background-color: #ffd700;
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+}
+
+.footer-section p {
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.footer-section ul li a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-section ul li a:hover {
+    color: #ffd700;
+}
+
+.social-icons {
+    display: flex;
+    gap: 15px;
+}
+
+.social-icons li {
+    list-style: none;
+}
+
+.social-icons li a {
+    color: #fff;
+    font-size: 20px;
+    transition: color 0.3s ease;
+}
+
+.social-icons li a:hover {
+    color: #ffd700;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #444;
+    font-size: 14px;
+}
+
+.footer-bottom p {
+    margin: 0;
+}

@@ -1,33 +1,59 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="./estilos/login.css">
+    <title>Login</title>
+    <link rel="stylesheet" href="./css/login.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"/>
 </head>
 
 <body>
+    
+    <header>
+        <nav class="navContainer">
+            <div class="icono">Hastechno</div>
+            <ul>
+                </div>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="">Login</a></li>
+                <div class="cart">
+                </div>
+            </ul>
+            <label for="check" class="bar">
+                <span class="material-symbols-outlined menu" id="menu">
+                    menu
+                </span>
+                <span class="material-symbols-outlined close" id="close">
+                    close
+                </span>
+            </label>
+        </nav>
+    </header>
+
+
+
+    
     <div class="container">
         <div class="info">
-            <p class="txt-1">Gracias por visitarnos</p>
-            <h2 >Bienveido again</h2>
+            <p class="txt-1">HASTECHNO</p> <br><br>
+                <img class="icon-h" src="../img/h-1000x750.png" alt="h">
             <hr>
 
-            <p class="txt-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis voluptates expedita cum officiis aspernatur dolorem enim consequuntur, eum facere laudantium atque cumque consectetur sit commodi. Provident impedit saepe sapiente sint.</p>
+            <p class="txt-2">contenido relevante, preciso y accesible que abarque una amplia gama de temas tecnológicos, desde las últimas noticias y avances en la industria hasta guías prácticas, reseñas de productos y análisis expertos.</p>
         </div>
 
         <form class="form">
-            <h2>login</h2>
-
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi quia perspiciatis eaque quo velit cum in. Nulla ullam voluptatem odio, id, ab veniam eligendi cumque, cum a repellendus error animi?</p>
+                <img class="user-icon" src="../login/img/user.png" alt="">
+            <p>plataforma de comercio electrónico accesible y segura, dedicada a la venta de computadoras y accesorios de tecnología relacionados</p>
 
             <div class="inputs">
                 <input class="box" type="email" placeholder="Ingresa tu correo" required>
                 <input class="box" type="password" placeholder="Ingresa tu contraseña" required>
 
-                <a href="#">Olvidaste tu contraseña</a>
-                <input class="submit" type="submit" value="login">
+
+                <a class="olvida-password" href="#">Olvidaste tu contraseña</a>
+                <input class="submit" type="submit" value="Ingresar">
 
             </div>
         </form>

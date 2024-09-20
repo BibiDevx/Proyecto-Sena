@@ -1,0 +1,325 @@
+body{
+    background-color:#133746;
+    overflow: hidden;
+}
+
+* {
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+/*Navegacion*/ 
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #000814;
+    z-index: 100;
+}
+
+nav{
+    display: flex;
+    width: 100%;
+    background-color: #1b3e4d;
+    position: relative;
+    justify-content: space-between;
+    text-align: center;
+    padding: 10px 25px;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.283);
+}
+nav .icono{
+    font-size: 35px;
+    font-weight: 800;
+    color: #fdfffc;
+    cursor: pointer;
+}
+nav ul{
+    display: flex;
+    list-style: none;
+    margin: auto 0;
+}
+nav ul li {
+    margin: auto 10px;
+}
+nav ul li a{
+    color: #fff;
+    font-size: 20px;
+    text-decoration: none;
+    text-transform: capitalize;
+    letter-spacing: 1px;
+    padding: 5px 10px 7px;
+}
+nav ul li a:hover{
+    background-color: #000814;
+    color: #fdfffc;
+    transition: 0.5s;
+    border-radius: 30px;
+}
+nav .boxSearch{
+  display: flex;
+  margin: auto 0;
+  height: 35px;
+  line-height: 35px;
+}
+nav .boxSearch input{
+  border: none;
+  outline:none;
+  background: #fff;
+  height: 100%;
+  padding: 0 10px;
+  font-size: 20px;
+  width: 350px;
+  border-radius: 30px 0px 0px 30px;
+}
+nav .boxSearch span{
+    color: #4f78b4;
+    font-size: 20px;
+    background-color: #ffffff;
+    height: 100%;
+    padding: 8px;
+    position: relative;
+    cursor: pointer;
+    z-index: 1;
+    border-radius: 0px 30px 30px 0;
+}
+nav .boxSearch span:hover{
+  background-color: #000814;
+  transition: 0.5s;
+  border-radius: 0px 30px 30px 0;
+}
+nav .cart{
+  display: flex;
+  margin: auto 0;
+  height: 35px;
+  line-height: 35px;
+}
+nav .cart span{
+  color: #4f78b4;
+  font-size: 20px;
+  background-color: #ffffff;
+  height: 100%;
+  padding: 8px;
+  position: relative;
+  cursor: pointer;
+  z-index: 1;
+  border-radius:30px;
+}
+nav .cart span:hover{
+    background-color: #000814;
+    transition: 0.5s;
+    border-radius: 30px;
+}
+nav .bar{
+    position: relative;
+    margin: auto;
+    display: none;
+}
+nav .bar span{
+    position: absolute;
+    color: #fdfffc;
+    font-size: 35px;
+}
+
+
+.container{
+    display: flex;
+    height: 700px;
+    width: 1000px;
+    box-shadow: 0 0 20px rgb(0, 0, 0, 0.4);
+    margin: auto;
+    margin-top: 9%;
+    border-radius: 80px;
+}
+
+.info{
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(71, 88, 95, 0.5));
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    text-align: center;
+    padding: 35px 50px 90px 60px;
+    width: 50%;
+    border-radius: 80px 0 0 80px;
+}
+
+
+
+.txt-1{
+    font-family: fantasy;
+    color: #c5c6c7;
+    text-transform: capitalize;
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.icon-h{
+    background-color: #fdfffc;
+    height: 100px;
+    margin: 50px 20px 40px 20px;
+    border: 5px solid #000;
+    border-radius: 20%;
+}
+
+.info h2{
+    color: aliceblue;
+    text-transform: uppercase;
+    font-size: 50px;
+    margin-bottom: 25px;
+}
+
+hr{
+    width: 100%;
+    border: 3px solid #66f6f1;
+    border-radius: 100%;
+    margin-bottom: 25px;
+}
+
+.txt-2{
+    color: #c5c6c7;
+    font-size: 18px;
+}
+
+.form{
+    padding: 80px 100px 20px 100px;
+    width: 50%;
+    text-align: center;
+    background-color:#1f2833;
+    border-radius: 0 80px 80px 0;
+}
+
+.user-icon{
+    background-color: #66f6f1;
+    padding: 7px;
+    border: 5px solid #000;
+    border-radius: 50%;
+    height: 10%;
+    margin: 10px;
+}
+
+
+.form p{
+    font-size: 16px;
+    color: #c5c6c7;
+    margin-bottom: 25px;
+}
+
+.inputs{
+    display: flex;
+    flex-direction: column;
+}
+
+.box{
+    background-color:transparent;
+    margin:1rem;
+    border: 0 ;
+    border-bottom: solid 1px;
+    border-color: rgba(128, 128, 128, 0.267);
+    padding: 10px 15px;
+    
+}
+
+.olvida-password{
+    color: #c5c6c7;
+    margin: 0px 0px 10px 0px;
+    font-size: 15px;
+    margin-top: 2rem;
+}
+
+.submit{
+    margin-top: 2rem;
+    padding: 10px;
+    background-color:#1b5867;
+    color: #c5c6c7;
+    border: none;
+    border-radius: 25px;
+}
+
+.submit:hover{
+    background-color: #c56;
+    transition: 0.5s;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+
+
+@media(max-width:1000px){
+    nav{
+        display: block;
+        padding: 0;
+    }
+    nav .icono{
+        display: inline-block;
+        padding: 15px 30px;
+    }
+    nav .boxSearch{
+        display: inline-flex;
+        width: 100%;
+        justify-content: center;
+        margin-bottom: 15px;
+    }
+    nav .boxSearch input{
+        width: 90%;
+    }
+    nav ul{
+        display: flex;
+        flex-direction: column;
+        height: 0;
+        visibility: hidden;
+        transition: 0.3s;
+    }
+    nav ul li{
+        text-align: center;
+    }
+    nav ul li a{
+        display: block;
+        color: #fff;
+        font-size: 20px;
+        padding: 25px;
+    }
+    nav .cart{
+        display: block;
+        margin: auto 0;
+    }
+    nav .bar{
+        position: absolute;
+        top: 20px;
+        right: 80px;
+        display: block;
+        cursor: pointer;
+    }
+    nav .bar #close{
+        display: none;
+    }
+    #check:checked ~ nav .bar #close{
+        display: block;
+    }
+    #check:checked ~ nav .bar #menu{
+        display: none;
+    }
+    #check:checked ~ nav ul{
+        visibility: visible;
+        height: 465px;
+    }
+
+
+    .container{
+        width: 350px;
+        height: 600px;
+        margin-top: 150px;
+    }
+
+    .info{
+        display: none;
+    }
+
+    .form{
+        width: 100%;
+        padding: 30px;
+        border-radius: 80px;
+    }
+
+
+}

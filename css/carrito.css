@@ -1,0 +1,103 @@
+:root{
+    --clr-main: #4f77b4;
+    --clr-main-ligh: #4a89e7;
+    --clr-white:#ececec;
+    --clr-gray:#e2e2e2;
+
+}
+a{
+    text-decoration: none;
+    color: #000;
+}
+ul{
+    list-style: none;
+}
+.wrapper{
+    margin: auto;
+    width: 80%;
+}
+main{
+    background-color: var(--clr-white);
+    margin: 6.2rem 0  2rem 0;
+    border-radius: 2rem;
+}
+.titulo-principal{
+    /*color: var(--clr-main);*/
+    text-align: center;
+}
+.producto-titulo{
+    font-size: 1rem;
+}
+.contenedor-carrito{
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+.carrito-vacio,.carrito-comprado{
+    padding-left: 2rem;
+}
+.carrito-productos{
+    display: flex;
+    flex-direction: column;
+    gap: 10rem;
+}
+.carrito-producto{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--clr-main);
+    padding: 0.5rem;
+}
+.carrito-producto-imagen{
+    width: 30%;
+    border-radius: 1rem;
+}
+.carrito-producto small{
+    font-size: 0.75rem;
+}
+.carrito-acciones{
+    padding-bottom: 2rem;
+    display: flex;
+    justify-content: space-between;
+}
+.carrito-acciones-vaciar{
+    border: 0;
+    background-color: var(--clr-gray);
+    padding: 1rem;
+    border-radius: 1rem;
+    color: var(--clr-main);
+    cursor: pointer;
+    text-transform: capitalize;
+}
+.carrito-acciones-volver{
+    border: 0;
+    background-color: var(--clr-gray);
+    padding: 1rem;
+    border-radius: 1rem;
+    color: var(--clr-main);
+    cursor: pointer;
+    text-transform: capitalize;
+}
+.carrito-acciones-der{
+    display: flex;
+}
+.carrito-acciones-total{
+    display: flex;
+    background-color: var(--clr-gray);
+    border-radius: 1rem;
+    color: var(--clr-main);
+    text-transform: capitalize;
+    gap: 1rem;
+}
+.carrito-acciones-comprar{
+    border: 0;
+    background-color: var(--clr-main-ligh);
+    padding: 1rem;
+    border-radius: 0 1rem 1rem 0;
+    color: var(--clr-main);
+    cursor: pointer;
+    text-transform: capitalize;
+}
+.disabled{
+    display: none;
+}
