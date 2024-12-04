@@ -29,6 +29,7 @@ if ($producto != null) {
 
   <title>Hastechno</title>
   <link rel="stylesheet" href="./css/index.css">
+  <link rel="stylesheet" href="./css/checkout.css">
   <!--bootstrap-->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -49,6 +50,7 @@ if ($producto != null) {
           <thead>
             <tr>
               <th>Producto</th>
+              <th>Nombre</th>
               <th>Precio</th>
               <th>Cantidad</th>
               <th>Subtotal</th>
@@ -57,7 +59,7 @@ if ($producto != null) {
           <tbody>
             <?php
             if ($listaCarrito == null) {
-              echo '<tr><td colspan="5" class="text-center"><b>Lista vacia</b></td></tr>';
+              echo '<tr><td colspan="6" class="text-center"><b>Lista vacia</b></td></tr>';
             } else {
               $total = 0;
               foreach ($listaCarrito as $producto) {
@@ -69,7 +71,9 @@ if ($producto != null) {
                 $total += $subtotal;
                 ?>
                 <tr>
-                  <td><?php echo $nombreProducto; ?></td>
+                  <?php $imagen = "../img/productos/$idProducto/principal.png";?>
+                  <td class="tablaImg"><img class="img-thumbnail" src="<?php echo $imagen; ?>" alt=""></td>
+                  <td class="text-center m-auto"><?php echo $nombreProducto; ?></td>
                   <td><?php echo MONEDA . number_format($valorProducto, 0, ',', '.'); ?></td>
                   <td>
                     <input type="number" step="1" value="<?php echo $cantidad; ?>" size="5" name=""
