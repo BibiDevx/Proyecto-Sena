@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-11-2024 a las 20:40:30
+-- Tiempo de generación: 04-12-2024 a las 21:50:47
 -- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.2.12
+-- Versión de PHP: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -96,9 +96,11 @@ CREATE TABLE `cliente` (
   `idCliente` int(11) NOT NULL COMMENT 'numero con el que se identificara el cliente',
   `idUsuario` int(11) NOT NULL COMMENT 'numero con el que se identificara para saber que tipo de usuario es',
   `nombreCliente` varchar(25) NOT NULL COMMENT 'cadena de caracteres que identificara el nombre del cliente',
+  `apellidoCliente` varchar(20) NOT NULL COMMENT 'apellido del cliente',
+  `cedulaCliente` varchar(20) NOT NULL COMMENT 'numero de identidad',
   `correoCliente` varchar(50) NOT NULL COMMENT 'cadena de caracteres que identificara el correo del cliente ',
-  `claveCliente` varchar(10) NOT NULL COMMENT 'cadena de caracteres que identificara la clave para el ingreso del cliente ',
-  `telefonoCliente` bigint(12) NOT NULL COMMENT 'numero con el que se identificara el numero telefonico',
+  `passwordCliente` varchar(120) NOT NULL COMMENT 'cadena de caracteres que identificara la clave para el ingreso del cliente ',
+  `telefonoCliente` varchar(20) NOT NULL COMMENT 'numero con el que se identificara el numero telefonico',
   `direccionCliente` varchar(25) NOT NULL COMMENT 'cadena de caracteres que identificara la direccion del cliente '
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -106,9 +108,11 @@ CREATE TABLE `cliente` (
 -- Volcado de datos para la tabla `cliente`
 --
 
-INSERT INTO `cliente` (`idCliente`, `idUsuario`, `nombreCliente`, `correoCliente`, `claveCliente`, `telefonoCliente`, `direccionCliente`) VALUES
-(1, 3, 'juan', 'juan@gmail.com', 'sdvsd', 3176784973, 'cra12#12-34c-26'),
-(2, 3, 'vanesa', 'vanesa@gmaill.com', 'password', 3176784963, 'cra12#12-34c-26');
+INSERT INTO `cliente` (`idCliente`, `idUsuario`, `nombreCliente`, `apellidoCliente`, `cedulaCliente`, `correoCliente`, `passwordCliente`, `telefonoCliente`, `direccionCliente`) VALUES
+(1, 3, 'juan', '', '0', 'juan@gmail.com', 'sdvsd', '3176784973', 'cra12#12-34c-26'),
+(2, 3, 'vanesa', '', '0', 'vanesa@gmaill.com', 'password', '3176784963', 'cra12#12-34c-26'),
+(12, 3, 'Marco', 'Polo', '1000486959', 'marcopolo@gmail.com', '1234', '3205298667', 'cl 41a 23 18'),
+(13, 3, 'Alex', 'Poveda', '1000576806', 'alpox@gmail.com', '$2y$10$nfHRC4W70A0Wk.EONpEWVuMxW70tWOjln2qijSUEIUc9Zl3ISjVNW', '3246150847', 'cr 53c 128 19');
 
 -- --------------------------------------------------------
 
@@ -180,26 +184,27 @@ CREATE TABLE `producto` (
   `nombreProducto` varchar(100) NOT NULL COMMENT 'cadena de caracteres que identificara el nombre del producto',
   `definicionProducto` text NOT NULL COMMENT 'caja de texto que proporcionara informacion sobre el producto',
   `valorProducto` int(11) NOT NULL COMMENT 'numero con el que se proporciona el valor del producto',
-  `idProveedor` int(11) NOT NULL COMMENT 'numero con el que se identificara el proveedor'
+  `idProveedor` int(11) NOT NULL COMMENT 'numero con el que se identificara el proveedor',
+  `disponibilidad` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `producto`
 --
 
-INSERT INTO `producto` (`idProducto`, `nombreProducto`, `definicionProducto`, `valorProducto`, `idProveedor`) VALUES
-(1, 'BOARD ASUS B550M-A AC WIFI', '', 542000, 1),
-(2, 'BOARD ASUS B650M-A WIFI', '', 875000, 1),
-(3, 'BOARD ASUS H510M-K', '', 402000, 1),
-(4, 'BOARD GIGABYTE A520M-K V2', '', 329000, 1),
-(5, 'BOARD GIGABYTE B550M DS3H', '', 525000, 1),
-(6, 'BOARD MSI A520M-A PRO', '', 329000, 1),
-(7, 'BOARD MSI PRO B550M VDH WIFI', '', 483000, 1),
-(8, 'FUENTE CORSAIR CV 650W 80', '', 289000, 1),
-(9, 'FUENTE CORSAIR CV 750W 80', '', 329000, 1),
-(10, 'MEMORIA RAM DDR4 8GB 3600MHz CORSAIR VENGEANCE LPX', '', 112000, 1),
-(11, 'MEMORIA RAM PORTATIL DDR4 16GB 3200MHz CORSAIR VENGEANCE', '', 178000, 1),
-(12, 'tarjetaDeVideo', '', 0, 1);
+INSERT INTO `producto` (`idProducto`, `nombreProducto`, `definicionProducto`, `valorProducto`, `idProveedor`, `disponibilidad`) VALUES
+(1, 'BOARD ASUS B550M-A AC WIFI', '', 542000, 1, 1),
+(2, 'BOARD ASUS B650M-A WIFI', '', 875000, 1, 1),
+(3, 'BOARD ASUS H510M-K', '', 402000, 1, 1),
+(4, 'BOARD GIGABYTE A520M-K V2', '', 329000, 1, 1),
+(5, 'BOARD GIGABYTE B550M DS3H', '', 525000, 1, 1),
+(6, 'BOARD MSI A520M-A PRO', '', 329000, 1, 1),
+(7, 'BOARD MSI PRO B550M VDH WIFI', '', 483000, 1, 1),
+(8, 'FUENTE CORSAIR CV 650W 80', '', 289000, 1, 1),
+(9, 'FUENTE CORSAIR CV 750W 80', '', 329000, 1, 1),
+(10, 'MEMORIA RAM DDR4 8GB 3600MHz CORSAIR VENGEANCE LPX', '', 112000, 1, 1),
+(11, 'MEMORIA RAM PORTATIL DDR4 16GB 3200MHz CORSAIR VENGEANCE', '', 178000, 1, 1),
+(12, 'tarjetaDeVideo', '', 0, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -333,7 +338,7 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT COMMENT 'numero con el que se identificara el cliente', AUTO_INCREMENT=11;
+  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT COMMENT 'numero con el que se identificara el cliente', AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `factura`
