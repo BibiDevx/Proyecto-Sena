@@ -17,20 +17,34 @@ if (!empty($_POST)) {
   $direccionCliente = trim($_POST['direccionCliente']);
   $telefonoCliente = trim($_POST['telefonoCliente']);
   $passwordCliente = trim($_POST['passwordCliente']);
-  $repasswordCliente = trim($_POST['repasswordCliente']);
+  $repasswordCliente = trim($_POST['repasswordCliente']); 
+
+  if (esNulo([$nombreCliente, $apellidoCliente, $cedulaCliente, $correoCliente, $direccionCliente, $telefonoCliente, $passwordCliente, $repasswordCliente])) {
+    $errors[] = 'Debe llenar todos los campos';
+  }
+  if (!esCorreo($correoCliente)) {
+    $errors[] = "La direccion de correo no es valida";
+  }
+
+  if (usuarioExiste($cedulaCliente, $con)) {
+    $errors[] = "Usuario $cedulaCliente ya existe";
+  }
+  if (emailExiste($correoCliente, $con)) {
+    $errors[] = "El correo electronico $correoCliente ya existe";
+  }
+
+  if (!validaPassword($passwordCliente, $repasswordCliente)) {
+    $errors[] = "Las contraseñas no coinciden";
+  }
 
   $prueba = "error al funcionar";
-  $pass_hash=password_hash($passwordCliente,PASSWORD_DEFAULT);
+  $pass_hash = password_hash($passwordCliente, PASSWORD_DEFAULT);
 
-  $idCliente=registrarCliente([$nombreCliente,$apellidoCliente,$cedulaCliente,$correoCliente,$direccionCliente,$telefonoCliente,$pass_hash],$con);
-  if($idCliente<0){
-    return $prueba;
-  }
-  if (count($errors)==0) {
-
-  }else{
-    $errors[]="Error al registrar";
-    print_r($errors);
+  if (count($errors) == 0) {
+    $idCliente = registrarCliente([$nombreCliente, $apellidoCliente, $cedulaCliente, $correoCliente, $direccionCliente, $telefonoCliente, $pass_hash], $con);
+    if ($idCliente < 0) {
+      return $prueba;
+    }
   }
 }
 
@@ -62,6 +76,9 @@ if (!empty($_POST)) {
   <main>
     <div class="container">
       <h2>Datos del cliente</h2>
+
+      <?php mostrarM($errors);?>
+
       <form class="row g-3" action="registro.php" method="post" autocomplete="off">
         <div class="col-md-6">
           <label for="nombreCliente"><span class="text-danger">*</span>Nombres</label>
