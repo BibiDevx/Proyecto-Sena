@@ -19,14 +19,31 @@
                     <a href="#" class="nav-link ">Marcas</a>
                 </li>
             </ul>
-            <a href="checkout.php" class="btn btn-success">
+            <a href="checkout.php" class="btn btn-success me-3 btn-sm">
                 <i class="bi bi-cart-fill">
                     <span id="num_cart" class="badge bg-secondary"><?php echo $num_cart; ?></span>
                 </i>
             </a>
-            <a href="login.php" class="btn btn-success">
-                <i class="bi bi-person-circle"> Login</i>
-            </a>
+            <?php
+            if (isset($_SESSION['user_id'])) { ?>
+
+                <div class="dropdown">
+                    <button class="btn btn-success btn-sm dropdown-toggle" type="button" id="btn_session"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-person-circle"></i><?php echo $_SESSION['user_name'] ?>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="btn_session">
+                        <li><a class="dropdown-item" href="cuenta.php">Tu cuenta</a></li>
+                        <li><a class="dropdown-item" href="edit.php">Historial compra</a></li>
+                        <li><a class="dropdown-item" href="edit.php">Editar datos</a></li>
+                        <li><a class="dropdown-item" href="logout.php">Cerrar sesion</a></li>
+                    </ul>
+                </div>
+            <?php } else { ?>
+                <a href="login.php" class="btn btn-success btn-sm ">
+                    <i class="bi bi-person-circle">Login</i>
+                </a>
+            <?php } ?>
         </div>
     </div>
 </div>

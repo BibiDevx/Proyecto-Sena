@@ -61,13 +61,18 @@ function mostrarM(array $errors){
     }
 }
 
-function login($cedulaCliente,$passwordCliente,$con){
-    $sql =$con->prepare('SELECT cedulaCliente,passwordCliente FROM cliente WHERE cedulaCliente LIKE ? LIMIT 1');
+function login($cedulaCliente,$nombreCliente,$passwordCliente,$con,$proceso ){
+    $sql =$con->prepare('SELECT cedulaCliente,nombreCliente,passwordCliente FROM cliente WHERE cedulaCliente LIKE ? LIMIT 1');
     $sql->execute([$cedulaCliente]);
     if($row=$sql->fetch(PDO::FETCH_ASSOC)){
         if(password_verify($passwordCliente,$row['passwordCliente'])){
             $_SESSION['user_id']= $row['cedulaCliente'];
-            header('Location: index.php');
+            $_SESSION['user_name']= $row['nombreCliente'];
+            if($proceso =='pago'){
+                header('Location: checkout.php');
+            }else{
+                header('Location: index.php');
+            }
             exit;
         }else{
             return 'El usuario y/o contraseña no son correctos';
@@ -75,4 +80,5 @@ function login($cedulaCliente,$passwordCliente,$con){
          
     }
 }
+
 ?>

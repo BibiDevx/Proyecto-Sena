@@ -7,18 +7,21 @@ require '../clases/clienteFunciones.php';
 $db = new Database();
 $con = $db->conectar();
 
+$proceso=isset($_GET['pago']) ? 'pago':'login';
+
 $errors = [];
 
 if (!empty($_POST)) {
   $cedulaCliente = trim($_POST['cedulaCliente']);
   $passwordCliente = trim($_POST['passwordCliente']);
+  $proceso = $_POST['proceso'] ?? 'login';
 
 
   if (esNulo([$cedulaCliente,$passwordCliente])) {
     $errors[] = 'Debe llenar todos los campos';
   }
   if(count($errors) == 0) {
-    $errors[]=login($cedulaCliente,$passwordCliente,$con);
+    $errors[]=login($cedulaCliente,$nombreCliente,$passwordCliente,$con,$proceso);
   }
 }
 ?>
@@ -52,12 +55,13 @@ if (!empty($_POST)) {
     <?php mostrarM($errors);?>
 
     <form class="row g-3" action="login.php" autocomplete="off" method="post">
+      <input type="hidden" name="proceso" value="<?php echo $proceso; ?>">
       <div class="form-floating">
-        <input type="text" class="form-control" placeholder="Usuario" name="cedulaCliente" id="cedulaCliente">
+        <input type="text" class="form-control" placeholder="Usuario" name="cedulaCliente" id="cedulaCliente" required>
         <label for="usuario">Usuario</label>
       </div>
       <div class="form-floating">
-        <input type="password" class="form-control" placeholder="Contraseña" name="passwordCliente" id="passwordCliente">
+        <input type="password" class="form-control" placeholder="Contraseña" name="passwordCliente" id="passwordCliente" required>
         <label for="password">Contraseña</label>
       </div>
       <div class="col-12">

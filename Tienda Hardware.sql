@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-12-2024 a las 21:50:47
+-- Tiempo de generación: 13-02-2025 a las 18:34:50
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -42,7 +42,7 @@ CREATE TABLE `admin` (
 
 INSERT INTO `admin` (`idAdmin`, `idUsuario`, `nombreAdmin`, `correoAdmin`, `claveAdmin`, `telefonoAdmin`) VALUES
 (1, 2, 'miguel a', 'miguela@gmail.com', '', 3216546544),
-(2, 2, 'miguel b', 'miguelb@gmail.com', '', 3216546556);
+(2, 2, 'miguel b', 'miguelb@gmail.com', '123', 3216546556);
 
 -- --------------------------------------------------------
 
@@ -60,12 +60,16 @@ CREATE TABLE `categoria` (
 --
 
 INSERT INTO `categoria` (`idCategoria`, `nombreCategoria`) VALUES
-(1, 'perifericos'),
-(2, 'monitores'),
-(3, 'procesadores'),
-(4, 'ventiladores'),
-(5, 'tarjetas'),
-(6, 'almacenamiento');
+(1, 'PERIFERICOS'),
+(2, 'MONITORES'),
+(3, 'PROCESADORES'),
+(4, 'VENTILADORES'),
+(5, 'TARJETAS DE VIDEO'),
+(6, 'ALMACENAMIENTO'),
+(7, 'BOARDS'),
+(8, 'CHASIS'),
+(9, 'FUENTES'),
+(10, 'MEMORIA');
 
 -- --------------------------------------------------------
 
@@ -83,8 +87,18 @@ CREATE TABLE `categoriaproducto` (
 --
 
 INSERT INTO `categoriaproducto` (`idCategoria`, `idProducto`) VALUES
-(1, 4),
-(1, 5);
+(7, 1),
+(7, 2),
+(7, 3),
+(7, 4),
+(7, 5),
+(7, 6),
+(7, 7),
+(10, 10),
+(10, 11),
+(5, 12),
+(9, 9),
+(9, 8);
 
 -- --------------------------------------------------------
 
@@ -109,10 +123,9 @@ CREATE TABLE `cliente` (
 --
 
 INSERT INTO `cliente` (`idCliente`, `idUsuario`, `nombreCliente`, `apellidoCliente`, `cedulaCliente`, `correoCliente`, `passwordCliente`, `telefonoCliente`, `direccionCliente`) VALUES
-(1, 3, 'juan', '', '0', 'juan@gmail.com', 'sdvsd', '3176784973', 'cra12#12-34c-26'),
-(2, 3, 'vanesa', '', '0', 'vanesa@gmaill.com', 'password', '3176784963', 'cra12#12-34c-26'),
-(12, 3, 'Marco', 'Polo', '1000486959', 'marcopolo@gmail.com', '1234', '3205298667', 'cl 41a 23 18'),
-(13, 3, 'Alex', 'Poveda', '1000576806', 'alpox@gmail.com', '$2y$10$nfHRC4W70A0Wk.EONpEWVuMxW70tWOjln2qijSUEIUc9Zl3ISjVNW', '3246150847', 'cr 53c 128 19');
+(2, 3, 'prueba20', 'test0', '1234', 'pruebashow@gmail.com', '$2y$10$35ooJ1G7klcbFHfIcQlz8uoxSY6ky4Eb1vIEFqHqLWCKRCfS86BdO', '123456788', 'pruebA'),
+(19, 3, 'Marx', 'Lopez', '1000254806', 'marxlop@gmail.com', '$2y$10$iapSN/RjJHW6cxiwFeIrNuZVPJR5pJhTHHlPhBsGbWnUPMwGHM0ou', '3162568899', 'CL 21 56 48'),
+(20, 3, 'prueba', 'test', '1000578963', 'testpru@gmail.com', '$2y$10$vAjc5pUfI3mJpsAQEIU4UOgI762PvBLGgBQi1Q0Ud/cObMO/qF/ne', '321568974', 'CR 58 189 19');
 
 -- --------------------------------------------------------
 
@@ -131,7 +144,8 @@ CREATE TABLE `factura` (
 --
 
 INSERT INTO `factura` (`idFactura`, `idPedido`, `fechaFactura`) VALUES
-(1, 1, '2024-05-29');
+(2, 3, '2025-02-12'),
+(3, 4, '2025-02-12');
 
 -- --------------------------------------------------------
 
@@ -150,8 +164,8 @@ CREATE TABLE `pedido` (
 --
 
 INSERT INTO `pedido` (`idPedido`, `idCliente`, `fechaPedido`) VALUES
-(1, 1, '2024-05-28'),
-(2, 2, '2024-05-28');
+(3, 20, '2025-02-11'),
+(4, 2, '2025-02-05');
 
 -- --------------------------------------------------------
 
@@ -171,7 +185,8 @@ CREATE TABLE `pedidoproducto` (
 --
 
 INSERT INTO `pedidoproducto` (`idProducto`, `idPedido`, `cantidadProducto`, `valorTotal`) VALUES
-(5, 1, 1, 50000);
+(1, 3, 4, 2168000),
+(8, 4, 2, 578000);
 
 -- --------------------------------------------------------
 
@@ -184,7 +199,7 @@ CREATE TABLE `producto` (
   `nombreProducto` varchar(100) NOT NULL COMMENT 'cadena de caracteres que identificara el nombre del producto',
   `definicionProducto` text NOT NULL COMMENT 'caja de texto que proporcionara informacion sobre el producto',
   `valorProducto` int(11) NOT NULL COMMENT 'numero con el que se proporciona el valor del producto',
-  `idProveedor` int(11) NOT NULL COMMENT 'numero con el que se identificara el proveedor',
+  `idProveedor` int(11) DEFAULT NULL COMMENT 'numero con el que se identificara el proveedor',
   `disponibilidad` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -193,9 +208,9 @@ CREATE TABLE `producto` (
 --
 
 INSERT INTO `producto` (`idProducto`, `nombreProducto`, `definicionProducto`, `valorProducto`, `idProveedor`, `disponibilidad`) VALUES
-(1, 'BOARD ASUS B550M-A AC WIFI', '', 542000, 1, 1),
-(2, 'BOARD ASUS B650M-A WIFI', '', 875000, 1, 1),
-(3, 'BOARD ASUS H510M-K', '', 402000, 1, 1),
+(1, 'BOARD ASUS B550M-A AC WIFI', '<br>\r\n<li>Socket AMD AM4: Listo para procesadores Ryzen™ de escritorio Series 5000, 4000G y 3000.</li>\r\n<li>Refrigeración completa: Disipador de VRM, disipador de PCH y Fan Xpert 2+.</li>\r\n<li>Conectividad ultrarrápida: Dual M.2, PCIe 4.0, Wi-Fi 802.11ac, USB 3.2 Gen 2 tipo A.</li>\r\n<li>Aura Sync RGB: Efectos LED sincronizables en una amplia gama de equipos de PC compatibles, incluidas tiras RGB direccionables.</li>\r\n</br>', 542000, 1, 1),
+(2, 'BOARD ASUS B650M-A WIFI', '<br>\r\n<li>Socket AMD AM5: Listo para procesadores de escritorio AMD Ryzen™.\r\nConectividad ultrarrápida: Wi-Fi 6, M.2 PCIe 5.0, Realtek 2.5Gb Ethernet, puertos USB 3.2 Gen 2, USB 3.2 Gen 1 Type-C® frontal .</li>\r\n<li>ASUS OptiMem II: Enrutamiento cuidadoso de trazas y vías, además de optimizaciones de la capa base para preservar la integridad de la señal para mejorar el overclocking de la memoria.</li>\r\n<li>Enfriamiento completo: Disipador de calor VRM, disipador de calor PCH, puertos de ventilador híbrido y Fan Xpert 2+.</li>\r\n<li>Iluminación Aura Sync RGB: Puertos direccionables Gen 2 integrados y puerto Aura RGB para tiras de LED RGB, sincronízalos fácilmente con hardware compatible con Aura Sync.</li>\r\n</br>', 875000, 1, 1),
+(3, 'BOARD ASUS H510M-K', '<br>\r\n<li>Socket Intel® LGA 1200: Listo para procesadores Intel® 11a y 10a Gen.</li>\r\n<li>Conectividad ultrarrápida: PCIe 4.0, puerto M.2 de 32 Gbps, Intel® Ethernet de 1 Gb y USB 3.2 Gen 1.</li>\r\n<li>Refrigeración completa: Disipador de calor PCH y Fan Xpert.</li>\r\n<li>5X Protection III: Múltiples protecciones de hardware para una protección completa.</li>\r\n</br>', 402000, 1, 1),
 (4, 'BOARD GIGABYTE A520M-K V2', '', 329000, 1, 1),
 (5, 'BOARD GIGABYTE B550M DS3H', '', 525000, 1, 1),
 (6, 'BOARD MSI A520M-A PRO', '', 329000, 1, 1),
@@ -204,7 +219,10 @@ INSERT INTO `producto` (`idProducto`, `nombreProducto`, `definicionProducto`, `v
 (9, 'FUENTE CORSAIR CV 750W 80', '', 329000, 1, 1),
 (10, 'MEMORIA RAM DDR4 8GB 3600MHz CORSAIR VENGEANCE LPX', '', 112000, 1, 1),
 (11, 'MEMORIA RAM PORTATIL DDR4 16GB 3200MHz CORSAIR VENGEANCE', '', 178000, 1, 1),
-(12, 'tarjetaDeVideo', '', 0, 1, 0);
+(12, 'tarjetaDeVideo', '', 1000, 1, 1),
+(13, 'Monitor Led Lg 24″ Ips Fhd 1ms-180Hz-G-Sync 24gs65f-B Pivot', '', 729000, 3, 1),
+(14, 'Monitor Led Lg 32″ Va Full Hd Curvo 100hz 32mr50c-B', '', 789000, 2, 1),
+(15, 'Monitor Led Lg 24″ Ips Fhd 1ms-180Hz-G-Sync 24gs65f-B Pivot', '', 729000, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -224,7 +242,9 @@ CREATE TABLE `proveedor` (
 --
 
 INSERT INTO `proveedor` (`idProveedor`, `nombreProveedor`, `correoProveedor`, `telefonoProveedor`) VALUES
-(1, 'compSAS', 'sas@gmail.com', 3123456975);
+(1, 'compSAS', 'sas@gmail.com', 3123456975),
+(2, 'DMI Computer', 'dmicomputer@gmail.com', 321456556),
+(3, 'PC SYSTEMS', 'pcsystems@gmail.com', 43256442);
 
 -- --------------------------------------------------------
 
@@ -332,37 +352,37 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT COMMENT 'numero con el que se identificara la categoria', AUTO_INCREMENT=7;
+  MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT COMMENT 'numero con el que se identificara la categoria', AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT COMMENT 'numero con el que se identificara el cliente', AUTO_INCREMENT=14;
+  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT COMMENT 'numero con el que se identificara el cliente', AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de la tabla `factura`
 --
 ALTER TABLE `factura`
-  MODIFY `idFactura` int(11) NOT NULL AUTO_INCREMENT COMMENT 'numero con el que se identificara la factura', AUTO_INCREMENT=2;
+  MODIFY `idFactura` int(11) NOT NULL AUTO_INCREMENT COMMENT 'numero con el que se identificara la factura', AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `pedido`
 --
 ALTER TABLE `pedido`
-  MODIFY `idPedido` int(11) NOT NULL AUTO_INCREMENT COMMENT 'numero con el que se identificara el pedido', AUTO_INCREMENT=3;
+  MODIFY `idPedido` int(11) NOT NULL AUTO_INCREMENT COMMENT 'numero con el que se identificara el pedido', AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `idProducto` int(11) NOT NULL AUTO_INCREMENT COMMENT 'numero con el que se identificara el producto', AUTO_INCREMENT=15;
+  MODIFY `idProducto` int(11) NOT NULL AUTO_INCREMENT COMMENT 'numero con el que se identificara el producto', AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de la tabla `proveedor`
 --
 ALTER TABLE `proveedor`
-  MODIFY `idProveedor` int(11) NOT NULL AUTO_INCREMENT COMMENT 'numero con el que se identificara el proveedor', AUTO_INCREMENT=2;
+  MODIFY `idProveedor` int(11) NOT NULL AUTO_INCREMENT COMMENT 'numero con el que se identificara el proveedor', AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
