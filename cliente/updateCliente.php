@@ -18,7 +18,7 @@ if (!empty($_POST)) {
   $telefonoCliente = trim($_POST['telefonoCliente']);
   $passwordCliente = trim($_POST['passwordCliente']);
   $repasswordCliente = trim($_POST['repasswordCliente']); 
-
+}
   
 
 ?>
