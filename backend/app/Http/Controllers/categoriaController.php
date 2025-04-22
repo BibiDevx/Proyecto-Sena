@@ -4,179 +4,68 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Categoria;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Validator;
+use App\Http\Controllers\BaseController;
 
-class categoriaController extends Controller
+class categoriaController extends BaseController
 {
-
     public function index()
     {
-        $students = Categoria::all();
-        //if ($students->isEmpty()) {
-        //    $data = [
-        //        'message' => 'No se encontraron el servidor estudiantes',
-        //        'status' => 200
-        //    ];
-        //    return response()->json([$data], 404);
-        //}
-        $data = [
-            'students' => $students,
-            'status' => 200
-        ];
-
-        return response()->json($data, 200);
+        $categorias = Categoria::all();
+        return $this->sendResponse($categorias, 'Lista de categorías obtenida correctamente');
     }
+
     public function store(Request $request)
     {
-        $validator = validator::make($request->all(), [
-            'name' => 'required|max:255',
-            'email' => 'required|email|unique:student',
-            'phone' => 'required|digits:10',
-            'language' => 'required|in:Spanish,English'
+        $request->validate([
+            'nombreCategoria' => 'required|string|max:255',
         ]);
 
-        if ($validator->fails()) {
-            $data = [
-                'message' => 'No se encontraron el servidor estudiantes',
-                'errors' => $validator->errors(),
-                'status' => 400
-            ];
-            return response()->json([$data], 400);
-        }
-        $student = Categoria::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'language' => $request->language
+        $categoria = Categoria::create([
+            'nombreCategoria' => $request->nombreCategoria
         ]);
-        if (!$student) {
-            $data = [
-                'message' => "Error al crear estudiante",
-                'status' => 500
-            ];
-            return response()->json([$data], 500);
-        }
-        $data = [
-            'student' => $student,
-            'status' => 201
-        ];
-        return response()->json([$data], 201);
-    }
-    public function show($id){
 
-        $student=Categoria::find($id);
-        if(!$student){
-            $data=[
-                'message'=>'Estudiante nom encontrado',
-                'status'=>404
-            ];
-            return response()->json($data,404);
-        }
-        $data=[
-            'student'=>$student,
-            'status'=>200
-        ];
-        return response()->json($data,200);
-    }
-    public function destroy($id){
-        $student=Categoria::find($id);
-        if(!$student){
-            $data=[
-                'message'=>'Estudiante no encontrado',
-                'status'=>404
-            ];
-            return response()->json($data,404);
-        }
-        $student->delete();
-
-        $data=[
-            'student'=>$student,
-            'status'=>200
-        ];
-        return response()->json($data,200);
+        return $this->sendResponse($categoria, 'Categoría creada correctamente');
     }
 
-    public function update(Request $request, $id){
-        $student=Categoria::find($id);
-        if(!$student){
-            $data=[
-                'message'=>'Estudiante no encontrado',
-                'status'=>404
-            ];
-            return response()->json($data,404);
+    public function show($id)
+    {
+        $categoria = Categoria::find($id);
+
+        if (!$categoria) {
+            return $this->sendError('Categoría no encontrada');
         }
-        $validator = validator::make($request->all(), [
-            'name' => 'required|max:255',
-            'email' => 'required|email|unique:student',
-            'phone' => 'required|digits:10',
-            'language' => 'required|in:Spanish,English'
+
+        return $this->sendResponse($categoria, 'Categoría obtenida correctamente');
+    }
+
+    public function updatePartial(Request $request, $id)
+    {
+        $categoria = Categoria::find($id);
+
+        if (!$categoria) {
+            return $this->sendError('Categoría no encontrada');
+        }
+
+        $request->validate([
+            'nombreCategoria' => 'sometimes|required|string|max:255',
         ]);
-        if ($validator->fails()) {
-            $data = [
-                'message' => 'No se encontraron el servidor estudiantes',
-                'errors' => $validator->errors(),
-                'status' => 400
-            ];
-            return response()->json([$data], 400);
-        }
-        $student->name=$request->name;
-        $student->email=$request->email;
-        $student->phone=$request->phone;
-        $student->language=$request->language;
 
-        $student->save();
+        $categoria->fill($request->only(['nombreCategoria']));
+        $categoria->save();
 
-        $data=[
-            'message'=>'Estudiante Actualizado',
-            'student'=>$student,
-            'status'=>200
-        ];
-        return response()->json($data,200);
+        return $this->sendResponse($categoria, 'Categoría actualizada correctamente');
     }
-    public function updatePartial(Request $request, $id){
-        $student=Categoria::find($id);
-        if(!$student){
-            $data=[
-                'message'=>'Estudiante no encontrado',
-                'status'=>404
-            ];
-            return response()->json($data,404);
-        }
-        $validator = validator::make($request->all(), [
-            'name' => 'max:255',
-            'email' => 'email|unique:student',
-            'phone' => 'digits:10',
-            'language' => 'in:Spanish,English'
-        ]);
-        if ($validator->fails()) {
-            $data = [
-                'message' => 'No se encontraron el servidor estudiantes',
-                'errors' => $validator->errors(),
-                'status' => 400
-            ];
-            return response()->json([$data], 400);
-        }
-        if($request->has('name')){
-            $student->name=$request->name;
-        }
-        if($request->has('email')){
-            $student->email=$request->email;
-        }
-        if($request->has('phone')){
-            $student->phone=$request->phone;
-        }
-        if($request->has('language')){
-            $student->language=$request->language;
+
+    public function destroy($id)
+    {
+        $categoria = Categoria::find($id);
+
+        if (!$categoria) {
+            return $this->sendError('Categoría no encontrada');
         }
 
-        $student->save();
+        $categoria->delete();
 
-        $data=[
-            'message'=>'Estudiante Actualizado',
-            'student'=>$student,
-            'status'=>200
-        ];
-        return response()->json($data,200);
+        return $this->sendResponse([], 'Categoría eliminada correctamente');
     }
 }

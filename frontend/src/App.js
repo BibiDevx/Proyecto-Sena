@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from "react-route
 import ClienteRoutes from "./routes/ClienteRoutes";
 import AdminRoutes from "./routes/AdminRoutes";
 import Navbar from "./components/Navbar";
+import Perfil from "./components/Perfil";
 import SidebarAdmin from "./components/SidebarAdmin";
 
 function App() {
@@ -24,6 +25,7 @@ function MainLayout() {
         {!isAdminRoute || isTestView ? <Navbar /> : null} {/* Navbar visible en cliente y en prueba */}
         <Routes>
           <Route path="/*" element={<ClienteRoutes />} />
+          <Route path="/perfil" element={<Perfil />} />
           <Route path="/admin/*" element={<AdminRoutes />} />
         </Routes>
       </div>

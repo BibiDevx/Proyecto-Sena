@@ -14,4 +14,6 @@ class Rol extends Model
     protected $fillable = [
         'nombreRol'
     ];
+
+    protected $hidden = ['created_at', 'updated_at'];
 }

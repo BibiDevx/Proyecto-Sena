@@ -24,4 +24,5 @@ class Cliente extends Model
     {
         return $this->belongsTo(Usuario::class, 'idUsuario');
     }
+    protected $hidden = ['created_at', 'updated_at'];
 }

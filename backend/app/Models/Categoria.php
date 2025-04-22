@@ -14,7 +14,12 @@ class Categoria extends Model
     protected $primaryKey = 'idCategoria';
 
     protected $fillable = [
-        'idCategoria',
         'nombreCategoria'
     ];
+
+    public function productos()
+    {
+        return $this->belongsToMany(Producto::class, 'categoriaproducto', 'idCategoria', 'idProducto');
+    }
+    protected $hidden = ['created_at', 'updated_at'];
 }

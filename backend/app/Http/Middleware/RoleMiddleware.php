@@ -14,10 +14,15 @@ class RoleMiddleware
         $user = JWTAuth::parseToken()->authenticate();
 
         // Verificar si el usuario y su rol existen
-        if (!$user || !$user->rol || $user->rol->nombreRol !== $role) {
+        if (!$user || !$user->rol) {
             return response()->json(['error' => 'Acceso no autorizado'], 403);
         }
 
-        return $next($request);
+        // Permitir acceso si el usuario tiene el rol requerido o si es SuperAdmin
+        if ($user->rol->nombreRol === 'SuperAdmin' || $user->rol->nombreRol === $role) {
+            return $next($request);
+        }
+
+        return response()->json(['error' => 'Acceso no autorizado'], 403);
     }
 }

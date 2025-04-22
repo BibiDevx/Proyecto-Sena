@@ -1,22 +1,27 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import authService from "../../services/authServices";
+import authServices from "../../services/authServices";
 
 const Login = () => {
-  const [cedulaCliente, setCedulaCliente] = useState("");
-  const [passwordCliente, setPasswordCliente] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
-
+  
     try {
-      const response = await authService.login(cedulaCliente, passwordCliente);
-      if (response.token) {
-        localStorage.setItem("token", response.token);
-        navigate("/dashboard");
+      const response = await authServices.login(email, password);
+  
+      // El token viene dentro de data.access_token
+      if (response.data && response.data.access_token) {
+        localStorage.setItem("token", response.data.access_token);
+        localStorage.setItem("user", JSON.stringify(response.data.user)); // opcional, si necesitas datos del usuario
+        navigate("/perfil");
+      } else {
+        setError("No se recibió un token");
       }
     } catch (err) {
       setError("Usuario o contraseña incorrectos");
@@ -31,12 +36,12 @@ const Login = () => {
           {error && <div className="alert alert-danger">{error}</div>}
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
-              <label className="form-label">Usuario</label>
+              <label className="form-label">Correo electrónico</label>
               <input
-                type="text"
+                type="email"
                 className="form-control"
-                value={cedulaCliente}
-                onChange={(e) => setCedulaCliente(e.target.value)}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 required
               />
             </div>
@@ -45,8 +50,8 @@ const Login = () => {
               <input
                 type="password"
                 className="form-control"
-                value={passwordCliente}
-                onChange={(e) => setPasswordCliente(e.target.value)}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 required
               />
             </div>

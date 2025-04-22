@@ -1,58 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Carousel } from "react-bootstrap";
 
-const products = [
-  {
-    id: 1,
-    name: "Tarjeta Gráfica RTX 4070",
-    price: 3500000,
-    image: "https://via.placeholder.com/150"
-  },
-  {
-    id: 2,
-    name: "Procesador Ryzen 7 7800X3D",
-    price: 2800000,
-    image: "https://via.placeholder.com/150"
-  },
-  {
-    id: 3,
-    name: "Placa Madre MSI B550",
-    price: 1200000,
-    image: "https://via.placeholder.com/150"
-  }
-];
-
-const newProducts = [
-  {
-    id: 4,
-    name: "Monitor Gaming 144Hz",
-    price: 900000,
-    image: "https://via.placeholder.com/150"
-  },
-  {
-    id: 5,
-    name: "Memoria RAM 32GB DDR5",
-    price: 600000,
-    image: "https://via.placeholder.com/150"
-  }
-];
-
-const news = [
-  { title: "Nueva generación de procesadores Intel", content: "Intel lanza su serie 14 para competir con AMD." },
-  { title: "RTX 5000 en camino", content: "Nvidia anuncia su nueva generación de tarjetas gráficas." }
-];
-
+// Card del producto
 const ProductCard = ({ product }) => {
+  const imagePath = `/assets/img/productos/${product.idProducto}/principal.png`; // Ajusta según tu estructura
+
   return (
     <div className="col">
       <div className="card shadow-sm">
-        <img src={product.image} alt={product.name} className="card-img-top" />
+        <img
+          src={imagePath}
+          alt={product.nombreProducto}
+          className="card-img-top"
+        />
         <div className="card-body">
-          <h5 className="card-title">{product.name}</h5>
-          <p className="card-text">${product.price.toLocaleString()}</p>
+          <h5 className="card-title">{product.nombreProducto}</h5>
+          <p className="card-text">${product.valorProducto.toLocaleString()}</p>
           <div className="d-flex justify-content-between align-items-center">
-            <a href={`/info/${product.id}`} className="btn btn-primary">Info</a>
+            <a href={`/info/${product.idProducto}`} className="btn btn-primary">
+              Info
+            </a>
             <button className="btn btn-outline-primary">Agregar</button>
           </div>
         </div>
@@ -62,29 +30,44 @@ const ProductCard = ({ product }) => {
 };
 
 const HomePage = () => {
+  const [productosRecientes, setProductosRecientes] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:8000/api/verProductos/home")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          setProductosRecientes(data.data); //  Aquí solo pasamos el array
+        } else {
+          console.error("Error:", data.message);
+        }
+      })
+      .catch((error) => console.error("Fetch error:", error));
+  }, []);
+
   return (
     <div>
       {/* Slider */}
       <Carousel className="mt-3" interval={5000}>
         <Carousel.Item>
-          <img className="d-block w-100" src="https://via.placeholder.com/1200x400" alt="Oferta 1" />
-          <Carousel.Caption>
-            <h3>¡Grandes Descuentos en Tarjetas Gráficas!</h3>
-            <p>Aprovecha las ofertas en la serie RTX 4000.</p>
-          </Carousel.Caption>
+          <img
+            className="d-block w-100"
+            src="/assets/img/banner/banner1.png"
+            alt="Oferta 1"
+            style={{ height: "400px", width: "auto" }}
+          />
         </Carousel.Item>
+
         <Carousel.Item>
-          <img className="d-block w-100" src="https://via.placeholder.com/1200x400" alt="Oferta 2" />
+          <img
+            className="d-block w-100"
+            src="/assets/img/banner/banner2.png"
+            alt="Oferta 2"
+            style={{ height: "400px", width: "auto" }}
+          />
           <Carousel.Caption>
             <h3>Procesadores de Última Generación</h3>
-            <p>Consigue los nuevos Ryzen y Intel con descuento especial.</p>
-          </Carousel.Caption>
-        </Carousel.Item>
-        <Carousel.Item>
-          <img className="d-block w-100" src="https://via.placeholder.com/1200x400" alt="Oferta 3" />
-          <Carousel.Caption>
-            <h3>¡Actualiza tu PC ahora!</h3>
-            <p>Componentes de alta calidad para mejorar tu experiencia gaming.</p>
+            <p>Consigue los nuevos Ryzen e Intel.</p>
           </Carousel.Caption>
         </Carousel.Item>
       </Carousel>
@@ -93,37 +76,69 @@ const HomePage = () => {
       <div className="container mt-4">
         <h2 className="text-center">Productos Nuevos</h2>
         <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-          {newProducts.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
+          {productosRecientes.length > 0 ? (
+            productosRecientes.map((product) => (
+              <ProductCard key={product.idProducto} product={product} />
+            ))
+          ) : (
+            <p className="text-center">Cargando productos...</p>
+          )}
         </div>
       </div>
 
-      {/* Productos Destacados */}
-      <div className="container mt-4">
-        <h2 className="text-center">Productos Destacados</h2>
-        <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-          {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
-      </div>
-
-      {/* Noticias */}
-      <div className="container mt-4">
-        <h2 className="text-center">Últimas Noticias</h2>
+      <div className="container mt-5">
+        <h2 className="text-center mb-4">Novedades del Mundo Tech</h2>
         <div className="row">
-          {news.map((item, index) => (
-            <div key={index} className="col-md-6">
-              <div className="p-3 border rounded bg-light">
-                <h5>{item.title}</h5>
-                <p>{item.content}</p>
+          <div className="col-md-4">
+            <div className="card h-100">
+              <img
+                src="/assets/img/novedad/noticia1.png"
+                className="card-img-top"
+                alt="Noticia 1"
+              />
+              <div className="card-body">
+                <h5 className="card-title">NVIDIA lanza nueva RTX 5090</h5>
+                <p className="card-text">
+                  La nueva generación promete duplicar el rendimiento respecto a
+                  la 4090.
+                </p>
               </div>
             </div>
-          ))}
+          </div>
+          <div className="col-md-4">
+            <div className="card h-100">
+              <img
+                src="/assets/img/novedad/noticia2.png"
+                className="card-img-top"
+                alt="Noticia 2"
+              />
+              <div className="card-body">
+                <h5 className="card-title">AMD presenta Ryzen 9000</h5>
+                <p className="card-text">
+                  Con una arquitectura mejorada y consumo energético más
+                  eficiente.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="col-md-4">
+            <div className="card h-100">
+              <img
+                src="/assets/img/novedad/noticia3.png"
+                className="card-img-top"
+                alt="Noticia 3"
+              />
+              <div className="card-body">
+                <h5 className="card-title">Intel apuesta por chips híbridos</h5>
+                <p className="card-text">
+                  Los nuevos procesadores fusionan eficiencia y potencia para
+                  laptops.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-
       {/* Footer */}
       <footer className="bg-dark text-light text-center p-3 mt-4">
         <p>© 2025 PC Componentes | Todos los derechos reservados</p>

@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 
-class ClienteController extends BaseController
+class clienteController extends BaseController
 {
     // 🔹 Obtener todos los clientes
     public function index()
@@ -25,10 +25,79 @@ class ClienteController extends BaseController
         }
         return $this->sendResponse($cliente, 'Cliente encontrado.');
     }
-    
+
 
     // 🔹 Actualizar parcialmente un cliente
-    public function updatePartial(Request $request, $id)
+    public function updatePartial(Request $request)
+    {
+        $usuario = auth()->user(); // Esto obtiene al usuario logueado
+        $cliente = $usuario->cliente; // Relación cliente desde el modelo Usuario
+
+        if (!$cliente) {
+            return $this->sendError('Cliente no encontrado.', [], 404);
+        }
+
+        // Validar campos del cliente
+        $validator = Validator::make($request->all(), [
+            'nombreCliente' => 'sometimes|string|max:255',
+            'apellidoCliente' => 'sometimes|string|max:255',
+            'cedulaCliente' => 'sometimes|numeric|unique:cliente,cedulaCliente,' . $cliente->idCliente . ',idCliente',
+            'telefonoCliente' => 'sometimes|numeric',
+            'direccion' => 'sometimes|string|max:255',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->sendError('Errores de validación.', $validator->errors(), 422);
+        }
+
+        // Actualizar datos del cliente
+        $cliente->update($request->only([
+            'nombreCliente',
+            'apellidoCliente',
+            'cedulaCliente',
+            'telefonoCliente',
+            'direccion',
+        ]));
+
+        //  Ahora actualizamos email y contraseña desde el modelo Usuario
+        if ($request->has('email')) {
+            $request->validate([
+                'email' => 'email|max:255|unique:usuario,email,' . $usuario->id,
+            ]);
+            $usuario->email = $request->email;
+        }
+
+        if ($request->has('password')) {
+            $request->validate([
+                'password' => 'string|min:6',
+            ]);
+            $usuario->password = Hash::make($request->password);
+        }
+
+        $usuario->save(); // Guardamos los cambios de email o password si hubo
+
+        return $this->sendResponse($cliente, 'Perfil actualizado correctamente.');
+    }
+
+
+    public function destroy()
+    {
+        $usuario = auth()->user(); // Obtiene el usuario logueado
+        $cliente = $usuario->cliente; // Relación cliente desde el modelo Usuario
+
+        if (!$cliente) {
+            return $this->sendError('Cliente no encontrado.', [], 404);
+        }
+
+        // Eliminar datos del cliente
+        $cliente->delete();
+
+        // Eliminar el usuario (que está asociado al cliente)
+        $usuario->delete();
+
+        return $this->sendResponse([], 'Cuenta eliminada correctamente.');
+    }
+    public function actualizaCliente(Request $request, $id)
     {
         $cliente = Cliente::find($id);
         if (!$cliente) {
@@ -69,9 +138,7 @@ class ClienteController extends BaseController
 
         return $this->sendResponse($cliente, 'Cliente actualizado correctamente.');
     }
-
-    // 🔹 Eliminar un cliente
-    public function destroy($id)
+    public function eliminaCliente($id)
     {
         $cliente = Cliente::find($id);
         if (!$cliente) {
@@ -81,4 +148,5 @@ class ClienteController extends BaseController
         $cliente->delete();
         return $this->sendResponse([], 'Cliente eliminado exitosamente.');
     }
+
 }

@@ -40,7 +40,7 @@ class AuthController extends BaseController
 
         // 🔹 Llamar a UsuarioController para crear o recuperar usuario
         $usuario = $this->usuarioController->crearObtenerUsuario('Cliente', $request->email, $request->password);
-        
+
 
         if (!$usuario) {
             return response()->json(['error' => 'No se pudo crear el usuario'], 500);
@@ -83,7 +83,7 @@ class AuthController extends BaseController
             return response()->json(['error' => 'No se pudo crear el usuario'], 500);
         }
 
-        // 🔹 Registrar Cliente con el usuario creado
+        // 🔹 Registrar admin con el usuario creado
         $admin = Admin::create([
             'idUsuario' => $usuario->idUsuario,
             'nombreAdmin' => $request->nombreAdmin,
@@ -126,14 +126,25 @@ class AuthController extends BaseController
 
     // 🔹 Perfil
     public function profile()
-    {
-        try {
-            $user = JWTAuth::parseToken()->authenticate();
-            return response()->json(['success' => true, 'data' => $user], 200);
-        } catch (\Tymon\JWTAuth\Exceptions\JWTException $e) {
-            return response()->json(['error' => 'No autorizado'], 401);
-        }
+{
+    try {
+        // Autenticar usuario
+        $user = JWTAuth::parseToken()->authenticate();
+
+        // Cargar relaciones (rol, cliente, admin)
+        $user->load(['rol', 'cliente', 'admin']);
+
+        return response()->json([
+            'success' => true,
+            'data' => $user,
+        ], 200);
+
+    } catch (\Tymon\JWTAuth\Exceptions\JWTException $e) {
+        return response()->json(['error' => 'No autorizado'], 401);
     }
+}
+
+
 
     // 🔹 Logout
     public function logout()
