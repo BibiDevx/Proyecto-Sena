@@ -35,6 +35,12 @@ class productoController extends BaseController
 
         return $this->sendResponse($productos, 'Lista de productos disponibles');
     }
+    public function productosPorMarca($idMarca)
+    {
+        $productos = Producto::select('idProducto', 'nombreProducto', 'valorProducto')
+            ->where('idMarca', $idMarca)->get();
+        return response()->json($productos);
+    }
 
     public function show($id)
     {

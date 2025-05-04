@@ -1,22 +1,18 @@
 // src/services/authServices.js
 import axios from "axios";
 
-const API_URL = "http://localhost:8000/api/auth"; // Asegúrate de que coincide con tu backend
+const API_URL = "http://localhost:8000/api/auth";
 
 const login = async (email, password) => {
-  const response = await axios.post(`${API_URL}/login`, {
-    email,
-    password,
-  });
+  const response = await axios.post(`${API_URL}/login`, { email, password });
 
-  // ✅ Guardar token JWT en localStorage
-  const token = response.data.data.access_token;
-  localStorage.setItem("token", token);
+  const { access_token, user } = response.data.data;
 
-  // También podrías guardar info del usuario si lo necesitas
-  localStorage.setItem("user", JSON.stringify(response.data.data.user));
+  // Guardamos el token y el usuario
+  localStorage.setItem("token", access_token);
+  localStorage.setItem("user", JSON.stringify(user));
 
-  return response.data;
+  return { access_token, user };
 };
 
 const logout = async () => {
@@ -43,8 +39,21 @@ const getProfile = async () => {
   return response.data;
 };
 
+const updateProfile = async (data) => {
+  const token = localStorage.getItem("token");
+
+  const response = await axios.patch("http://localhost:8000/api/clientes/actualizar/cuenta", data, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  return response.data;
+};
+
 export default {
   login,
   logout,
   getProfile,
+  updateProfile,
 };

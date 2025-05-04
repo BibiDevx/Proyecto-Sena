@@ -1,20 +1,29 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-const categories = ["TODOS", "BOARDS", "TECLADOS", "MOUSE", "PERIFERICOS", "MONITORES", "FUENTES","ALMACENAMIENTO","PROCESADORES","MEMORIA RAM","AMD","INTEL","TARJETA GRAFICA","DISIPADORES","CHASIS","DIADEMAS","MICROFONOS","CAMARAS","VENTILADORES"];
+const categories = [
+  "TODOS", "BOARDS", "TECLADOS", "MOUSE", "PERIFERICOS", "MONITORES", "FUENTES",
+  "ALMACENAMIENTO", "PROCESADORES", "MEMORIA RAM", "AMD", "INTEL", "TARJETA GRAFICA",
+  "DISIPADORES", "CHASIS", "DIADEMAS", "MICROFONOS", "CAMARAS", "VENTILADORES"
+];
 
 const ProductCard = ({ product }) => {
   const imagePath = `/assets/img/productos/${product.idProducto}/principal.png`;
 
   return (
     <div className="col">
-      <div className="card shadow-sm">
+      <div className="card shadow-sm h-100">
         <img src={imagePath} alt={product.nombreProducto} className="card-img-top" />
-        <div className="card-body">
-          <h5 className="card-title">{product.nombreProducto}</h5>
-          <p className="card-text">${product.valorProducto.toLocaleString()}</p>
-          <div className="d-flex justify-content-between align-items-center">
-            <a href={`/info/${product.idProducto}`} className="btn btn-primary">Info</a>
+        <div className="card-body d-flex flex-column justify-content-between">
+          <div>
+            <h5 className="card-title">{product.nombreProducto}</h5>
+            <p className="card-text">${product.valorProducto.toLocaleString()}</p>
+          </div>
+          <div className="d-flex justify-content-between mt-3">
+            <Link to={`/info/${product.idProducto}`} className="btn btn-primary">
+              Info
+            </Link>
             <button className="btn btn-outline-primary">Agregar</button>
           </div>
         </div>
@@ -53,7 +62,7 @@ const ProductList = () => {
     <div className="container mt-4">
       <div className="row">
         {/* Filtros */}
-        <div className="col-md-3">
+        <div className="col-md-3 mb-4">
           <h5>Categoría</h5>
           <ul className="list-group">
             {categories.map((category) => (

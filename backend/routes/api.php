@@ -15,6 +15,7 @@ Route::prefix('verProductos')->group(function () {
     Route::get('/', [productoController::class, 'index']);
     Route::get('/{id}', [productoController::class, 'show'])->where('id', '[0-9]+');
     Route::get('/home', [productoController::class, 'home']);
+    Route::get('/marcas/{idMarca}', [productoController::class, 'productosPorMarca']);
 });
 Route::prefix('verMarcas')->group(function () {
     Route::get('/', [marcaController::class, 'index']);

@@ -62,7 +62,7 @@ class clienteController extends BaseController
         //  Ahora actualizamos email y contraseña desde el modelo Usuario
         if ($request->has('email')) {
             $request->validate([
-                'email' => 'email|max:255|unique:usuario,email,' . $usuario->id,
+                'email' => 'email|max:255|unique:usuario,email,' . $usuario->idUsuario . ',idUsuario',
             ]);
             $usuario->email = $request->email;
         }

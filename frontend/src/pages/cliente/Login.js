@@ -1,6 +1,8 @@
+// src/pages/Login.js
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import authServices from "../../services/authServices";
+import { useAuth } from "../../context/AuthContext";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -8,18 +10,18 @@ const Login = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
+  const { setUsuario } = useAuth();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
-  
+
     try {
-      const response = await authServices.login(email, password);
-  
-      // El token viene dentro de data.access_token
-      if (response.data && response.data.access_token) {
-        localStorage.setItem("token", response.data.access_token);
-        localStorage.setItem("user", JSON.stringify(response.data.user)); // opcional, si necesitas datos del usuario
-        navigate("/perfil");
+      const { access_token, user } = await authServices.login(email, password);
+
+      if (access_token) {
+        setUsuario(user);
+        navigate(user.role === "admin" ? "/admin" : "/perfil");
       } else {
         setError("No se recibió un token");
       }

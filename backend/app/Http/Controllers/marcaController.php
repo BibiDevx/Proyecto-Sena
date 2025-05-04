@@ -14,6 +14,7 @@ class marcaController extends BaseController
         return $this->sendResponse($marcas, 'Lista de marcas obtenida correctamente');
     }
 
+
     public function store(Request $request)
     {
         $request->validate([
