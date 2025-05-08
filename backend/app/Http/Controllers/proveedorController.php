@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Proveedor;
 use Illuminate\Http\Request;
 
-class proveedorController extends Controller
+class proveedorController extends BaseController
 {
     public function index()
     {
@@ -24,10 +24,9 @@ class proveedorController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nombre' => 'required|string|max:255',
-            'contacto' => 'nullable|string|max:255',
-            'telefono' => 'nullable|string|max:20',
-            'direccion' => 'nullable|string|max:255'
+            'nombreProveedor'=>'required|string|max:255',
+            'correoProveedor'=>'required|string|max:255',
+            'telefonoProveedor'=>'required|string|max:255'
         ]);
 
         $proveedor = Proveedor::create($request->all());
