@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class PedidoProductoController extends BaseController
 {
-    // Ver los productos 
+    // Ver productos 
     public function verProductos($idPedido)
     {
         $pedido = Pedido::with(['productos'])->find($idPedido);
@@ -20,7 +20,7 @@ class PedidoProductoController extends BaseController
         return response()->json($pedido);
     }
 
-    // Agregar un producto
+    // Agregar producto
     public function agregarProducto(Request $request, $idPedido)
     {
         $request->validate([
@@ -71,7 +71,7 @@ class PedidoProductoController extends BaseController
         return response()->json(['message' => 'Producto eliminadoo']);
     }
 
-    // Vaciar todos los productos
+    // Vaciar de productos
     public function vaciarPedido($idPedido)
     {
         $pedido = Pedido::find($idPedido);
