@@ -16,7 +16,7 @@ class proveedorController extends BaseController
     {
         $proveedor = Proveedor::find($id);
         if (!$proveedor) {
-            return response()->json(['message' => 'Proveedor no encontrado'], 404);
+            return response()->json(["message" => "Proveedor no encontrado"], 404);
         }
         return response()->json($proveedor);
     }
@@ -24,9 +24,9 @@ class proveedorController extends BaseController
     public function store(Request $request)
     {
         $request->validate([
-            'nombreProveedor'=>'required|string|max:255',
-            'correoProveedor'=>'required|string|max:255',
-            'telefonoProveedor'=>'required|string|max:255'
+            "nombreProveedor" => "required|string|max:255",
+            "correoProveedor" => "required|string|max:255",
+            "telefonoProveedor" => "required|string|max:255"
         ]);
 
         $proveedor = Proveedor::create($request->all());
@@ -37,7 +37,7 @@ class proveedorController extends BaseController
     {
         $proveedor = Proveedor::find($id);
         if (!$proveedor) {
-            return response()->json(['message' => 'Error'], 404);
+            return response()->json(["message" => "Error"], 404);
         }
 
         $proveedor->update($request->all());
@@ -48,10 +48,10 @@ class proveedorController extends BaseController
     {
         $proveedor = Proveedor::find($id);
         if (!$proveedor) {
-            return response()->json(['message' => 'Error'], 404);
+            return response()->json(["message" => "Error"], 404);
         }
 
         $proveedor->delete();
-        return response()->json(['message' => 'Proveedor eliminado']);
+        return response()->json(["message" => "Proveedor eliminado"]);
     }
 }
