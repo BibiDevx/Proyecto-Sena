@@ -9,14 +9,17 @@ class Factura extends Model
 {
     use HasFactory;
 
-    protected $table = 'factura';
-
-    protected $primaryKey = 'idFactura';
-    protected $foreignKey = 'idPedido';
+    protected $table = "factura";
+    protected $primaryKey = "idFactura";
 
     protected $fillable = [
-        'idFactura',
-        'idPedido',
-        'fechaFactura'
+        "idFactura",
+        "idPedido",
+        "fechaFactura"
     ];
+
+    public function pedido()
+    {
+        return $this->belongsTo(Pedido::class, "idPedido");
+    }
 }
