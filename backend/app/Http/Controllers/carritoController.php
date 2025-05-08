@@ -10,7 +10,7 @@ class CarritoController extends BaseController
 {
     public function verCarrito($idUsuario)
     {
-        // Obtener el carrito activo del usuario
+        // Obtener el carrito activo
         $carrito = Carrito::with(['productos'])->where('idUsuario', $idUsuario)->where('estado', 'activo')->first();
 
         if (!$carrito) {
@@ -22,7 +22,7 @@ class CarritoController extends BaseController
 
     public function agregarProducto(Request $request, $idUsuario)
     {
-        // Validar los datos de la entrada
+        // Validar los datos
         $request->validate([
             "idProducto" => "required|exists:producto,idProducto",
             "cantidad"   => "required|integer|min:1"
@@ -34,10 +34,10 @@ class CarritoController extends BaseController
             ['estado' => 'activo']
         );
 
-        // Agregar el producto al carrito
+        // Agregar producto
         $carrito->productos()->attach($request->idProducto, ['cantidad' => $request->cantidad]);
 
-        return response()->json(["message" => "Producto agregado al carrito"], 201);
+        return response()->json(["message" => "Producto agregado"], 201);
     }
 
     public function actualizarCantidad(Request $request, $idUsuario, $idProducto)
@@ -47,14 +47,14 @@ class CarritoController extends BaseController
             "cantidad" => "required|integer|min:1"
         ]);
 
-        // Obtener el carrito activo del usuario
+        // Obtener el carrito activo 
         $carrito = Carrito::where('idUsuario', $idUsuario)->where('estado', 'activo')->first();
 
         if (!$carrito) {
             return response()->json(["message" => "Carrito no encontrado"], 404);
         }
 
-        // Actualizar la cantidad del producto en el carrito
+        // Actualizar la cantidad
         $carrito->productos()->updateExistingPivot($idProducto, ['cantidad' => $request->cantidad]);
 
         return response()->json(["message" => "Cantidad actualizada correctamente"]);
@@ -62,14 +62,14 @@ class CarritoController extends BaseController
 
     public function eliminarProducto($idUsuario, $idProducto)
     {
-        // Obtener el carrito activo del usuario
+        // Obtener el carrito activo
         $carrito = Carrito::where('idUsuario', $idUsuario)->where('estado', 'activo')->first();
 
         if (!$carrito) {
             return response()->json(["message" => "Carrito no encontrado"], 404);
         }
 
-        // Eliminar el producto del carrito
+        // Eliminar producto
         $carrito->productos()->detach($idProducto);
 
         return response()->json(["message" => "Producto eliminado del carrito"]);
@@ -77,7 +77,7 @@ class CarritoController extends BaseController
 
     public function vaciarCarrito($idUsuario)
     {
-        // Obtener el carrito activo del usuario
+        // Obtener el carrito activo
         $carrito = Carrito::where('idUsuario', $idUsuario)->where('estado', 'activo')->first();
 
         if (!$carrito) {
