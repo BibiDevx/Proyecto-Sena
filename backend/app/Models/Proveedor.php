@@ -14,7 +14,6 @@ class Proveedor extends Model
     protected $primaryKey = 'idProveedor';
 
     protected $fillable = [
-        'idProveedor',
         'nombreProveedor',
         'correoProveedor',
         'telefonoProveedor'
