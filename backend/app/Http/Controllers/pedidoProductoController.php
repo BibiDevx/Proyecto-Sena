@@ -1,10 +1,19 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Models;
 
-use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class pedidoProductoController extends Controller
+class PedidoProducto extends Model
 {
-    //
+    use HasFactory;
+
+    protected $table = 'pedido_producto';
+
+    protected $fillable = [
+        'idPedido',
+        'idProducto',
+        'cantidad',
+    ];
 }
