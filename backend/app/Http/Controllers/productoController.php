@@ -16,14 +16,14 @@ class productoController extends BaseController
             ->take(9)
             ->get();
 
-        return $this->sendResponse($productos, 'Productos más recientes obtenidos correctamente');
+        return $this->sendResponse($productos, 'Productos más recientes');
     }
     
     public function detalles()
     {
-        ///Admin solo ve el de detalles ya que son todos los productos con su categoria y marca
+        //ver los detalles del producto
         $productos = Producto::with(['marca', 'categorias'])->get();
-        return $this->sendResponse($productos, 'Detalles de productos obtenidos correctamente');
+        return $this->sendResponse($productos, 'Detalles del productos');
     }
 
     public function index()
@@ -57,17 +57,17 @@ class productoController extends BaseController
 
     public function store(Request $request)
     {
-        // Validación de los campos de entrada
+        // Validar campos de la entrada
         $request->validate([
             'nombreProducto' => 'required|string|max:255',
-            'definicion' => 'required|string', // Aseguramos que se pase 'definicion'
+            'definicion' => 'required|string',
             'valorProducto' => 'required|numeric',
             'disponibilidad' => 'required|boolean',
             'idMarca' => 'required|exists:marca,idMarca',
             'idProveedor' => 'required|exists:proveedor,idProveedor',
         ]);
     
-        // Creamos el nuevo producto asegurándonos de que 'definicion' nunca sea nulo
+        // Crear un producto
         $producto = Producto::create([
             'nombreProducto' => $request->nombreProducto,
             'definicion' => $request->definicion ?: '', // Si 'definicion' es vacío o null, asigna una cadena vacía
@@ -77,7 +77,7 @@ class productoController extends BaseController
             'idProveedor' => $request->idProveedor,
         ]);
     
-        // Retornamos una respuesta con el producto creado
+        // Retornar a una respuesta
         return response()->json($producto, 201);
     }
 
@@ -103,7 +103,7 @@ class productoController extends BaseController
 
         $producto->fill($request->only([
             'nombreProducto',
-            'definicion',
+            'descripcion',
             'valorProducto',
             'disponibilidad',
             'idMarca',
@@ -124,11 +124,11 @@ class productoController extends BaseController
         $producto = Producto::find($id);
 
         if (!$producto) {
-            return $this->sendError('Producto no encontrado');
+            return $this->sendError('Error de producto');
         }
 
         $producto->delete();
 
-        return $this->sendResponse([], 'Producto eliminado correctamente');
+        return $this->sendResponse([], 'Producto eliminado ');
     }
 }
