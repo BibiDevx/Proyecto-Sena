@@ -4,39 +4,46 @@ namespace App\Http\Controllers;
 
 use App\Models\Factura;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 
 class FacturaController extends BaseController
 {
-    public function index()
+    public function index(): JsonResponse
     {
-        // Lista de las facturas
-        return response()->json(Factura::with("pedido")->get());
+        $facturas = Factura::with("pedido")->get();
+        return response()->json($facturas);
     }
 
-    public function show($id)
+    public function show($id): JsonResponse
     {
-        $factura = Factura::with("pedido")->find($id);
+        $factura = Factura::with("pedido", "detalles")->find($id);
 
         if (!$factura) {
-            return response()->json(["message" => "Error de factura"], 404);
+            return response()->json(["message" => "Factura no encontrada"], 404);
         }
 
         return response()->json($factura);
     }
 
-    public function store(Request $request)
+    public function store(Request $request): JsonResponse
     {
-        $request->validate([
+        $validated = $request->validate([
             "idPedido" => "required|exists:pedido,idPedido",
-            "fechaFactura" => "required|date"
+            "fechaFactura" => "required|date",
+            "metodoPago" => "required|string|max:50",
+            "estadoFactura" => "required|string|in:pendiente,pagada,anulada",
+            "observaciones" => "nullable|string",
+            "subtotal" => "required|numeric|min:0",
+            "iva" => "required|numeric|min:0",
+            "total" => "required|numeric|min:0",
         ]);
 
-        $factura = Factura::create($request->all());
+        $factura = Factura::create($validated);
 
         return response()->json($factura, 201);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $id): JsonResponse
     {
         $factura = Factura::find($id);
 
@@ -44,21 +51,31 @@ class FacturaController extends BaseController
             return response()->json(["message" => "Factura no encontrada"], 404);
         }
 
-        $factura->update($request->all());
+        $validated = $request->validate([
+            "fechaFactura" => "sometimes|date",
+            "metodoPago" => "sometimes|string|max:50",
+            "estadoFactura" => "sometimes|string|in:pendiente,pagada,anulada",
+            "observaciones" => "nullable|string",
+            "subtotal" => "sometimes|numeric|min:0",
+            "iva" => "sometimes|numeric|min:0",
+            "total" => "sometimes|numeric|min:0",
+        ]);
+
+        $factura->update($validated);
 
         return response()->json($factura);
     }
 
-    public function destroy($id)
+    public function destroy($id): JsonResponse
     {
         $factura = Factura::find($id);
 
         if (!$factura) {
-            return response()->json(["message" => "Error de factura"], 404);
+            return response()->json(["message" => "Factura no encontrada"], 404);
         }
 
         $factura->delete();
 
-        return response()->json(["message" => "Factura eliminada"]);
+        return response()->json(["message" => "Factura eliminada con éxito"]);
     }
 }
